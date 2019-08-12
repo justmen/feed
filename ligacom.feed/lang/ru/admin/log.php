@@ -1,0 +1,7 @@
+<?php
+
+$MESS['LIGACOM_FEED_ADMIN_LOG_ACCESS_DENIED'] = 'Доступ запрещен';
+$MESS['LIGACOM_FEED_ADMIN_LOG_REQUIRE_MODULE'] = 'Необходим модуль ligacom.feed';
+$MESS['LIGACOM_FEED_ADMIN_LOG_PAGE_TITLE'] = 'Журнал ошибок';
+$MESS['LIGACOM_FEED_ADMIN_LOG_ROW_ACTION_DELETE'] = 'Удалить';
+$MESS['LIGACOM_FEED_ADMIN_LOG_ROW_ACTION_DELETE_CONFIRM'] = 'Точно удалить?';

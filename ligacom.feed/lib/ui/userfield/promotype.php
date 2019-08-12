@@ -1,0 +1,19 @@
+<?php
+
+namespace Ligacom\Feed\Ui\UserField;
+
+class PromoType extends ReferenceType
+{
+	function GetAdminListViewHTML($arUserField, $arHtmlControl)
+	{
+		$result = parent::GetAdminListViewHTML($arUserField, $arHtmlControl);
+		$promoId = !empty($arHtmlControl['VALUE']) ? (int)$arHtmlControl['VALUE'] : 0;
+
+		if ($promoId > 0)
+		{
+			$result = '<a href="/bitrix/admin/ligacom_feed_promo_edit.php?lang=' . LANGUAGE_ID . '&id=' . $promoId . '">' . $result .  '</a>';
+		}
+
+		return $result;
+	}
+}

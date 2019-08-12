@@ -1,0 +1,5 @@
+<?php
+
+$MESS['LIGACOM_FEED_ADMIN_XML_ELEMENT_ACCESS_DENIED'] = 'Доступ запрещен';
+$MESS['LIGACOM_FEED_ADMIN_XML_ELEMENT_REQUIRE_MODULE'] = 'Необходим модуль ligacom.feed';
+$MESS['LIGACOM_FEED_ADMIN_XML_ELEMENT_NOT_FOUND'] = 'Элемент не найден';

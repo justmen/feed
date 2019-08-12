@@ -1,0 +1,6 @@
+<?php
+
+$MESS['LIGACOM_FEED_ACCESS_DENIED'] = 'Доступ запрещен';
+$MESS['LIGACOM_FEED_MODULE_NOT_INSTALLED'] = 'Модуль не установлен';
+$MESS['LIGACOM_FEED_FILTER_AUTOCOMPLETE_FIELD_NOT_FOUND'] = 'Поле не найдено';
+$MESS['LIGACOM_FEED_FILTER_AUTOCOMPLETE_FIELD_NOT_SUPPORT_AUTOCOMPLETE'] = 'Поле не поддериживает подсказки';

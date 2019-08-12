@@ -1,0 +1,3 @@
+<?php
+
+$MESS['LIGACOM_FEED_REFERENCE_STORAGE_MODEL_LOAD_NOT_FOUND'] = 'Элемент не найден';

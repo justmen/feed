@@ -1,0 +1,3 @@
+<?php
+
+$MESS['LIGACOM_FEED_T_ADMIN_GRID_LIST_FILTER_ANY'] = '(все)';

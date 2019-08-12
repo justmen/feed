@@ -1,0 +1,8 @@
+<?php
+
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_ACCESS_DENIED'] = 'Доступ запрещен';
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_REQUIRE_MODULE'] = 'Необходим модуль ligacom.feed';
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_TITLE'] = 'Результаты выгрузки Акций';
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_NAV_TITLE'] = 'Результаты выгрузки Акций';
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_ROW_ACTION_LOG'] = 'Журнал ошибок';
+$MESS['LIGACOM_FEED_ADMIN_PROMO_RESULT_ROW_XML_CONTENT'] = 'Содержимое тега';

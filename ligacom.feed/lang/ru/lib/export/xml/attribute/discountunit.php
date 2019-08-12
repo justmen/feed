@@ -1,0 +1,3 @@
+<?php
+
+$MESS['LIGACOM_FEED_EXPORT_ATTRIBUTE_DISCOUNT_UNIT_VALUE_INVALID'] = 'Недопустимое значение';
