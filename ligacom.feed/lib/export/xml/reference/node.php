@@ -29,6 +29,7 @@ abstract class Node
 		$this->parameters = $parameters + $this->getDefaultParameters();
 
 		$this->refreshParameters();
+
 	}
 
 	public function getDefaultParameters()

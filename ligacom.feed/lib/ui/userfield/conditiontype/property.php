@@ -9,7 +9,7 @@ Main\Localization\Loc::loadMessages(__FILE__);
 
 class Property
 {
-	const USER_TYPE = 'ym_condition_type';
+	const USER_TYPE = 'ym_condition_type';//todo заменить название, разобраться где это используется
 
 	public static function GetUserTypeDescription()
 	{

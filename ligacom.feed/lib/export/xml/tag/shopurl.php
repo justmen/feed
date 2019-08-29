@@ -9,7 +9,7 @@ class ShopUrl extends Base
 	public function getDefaultParameters()
 	{
 		return [
-			'name' => 'url',
+			'name' => 'link',
 			'value_type' => Feed\Type\Manager::TYPE_URL
 		];
 	}

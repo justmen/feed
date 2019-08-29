@@ -63,7 +63,7 @@ class Table extends Feed\Reference\Storage\Table
 
 		$connection->queryExecute(
 			'ALTER TABLE ' . $sqlHelper->quote($tableName)
-			. ' MODIFY ' . $sqlHelper->quote('VALUE') . ' text NOT NULL'
+			. ' MODIFY ' . $sqlHelper->quote('VALUE') . ' longtext NOT NULL'
 		);
 	}
 

@@ -177,7 +177,7 @@ abstract class Base
 	{
 		$this->extendData($tagValuesList, $elementList, $context, $data);
 
-		$tagResultList = $this->buildTagList($tagValuesList, $context);
+	$tagResultList = $this->buildTagList($tagValuesList, $context);
 
 		$this->writeDataUserEvent($tagResultList, $elementList, $context, $data);
 

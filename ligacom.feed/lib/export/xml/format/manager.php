@@ -9,8 +9,7 @@ Main\Localization\Loc::loadMessages(__FILE__);
 
 class Manager
 {
-	const EXPORT_SERVICE_LIGACOM_FEED = 'Ligacom.Feed';
-	const EXPORT_SERVICE_BERU_RU = 'Beru.ru';
+	const EXPORT_SERVICE_GOOGLE_MERCHANT = 'Google.Merchant';
 
 	const EXPORT_FORMAT_SIMPLE = 'simple';
 	const EXPORT_FORMAT_VENDOR_MODEL = 'vendor.model';
@@ -30,8 +29,7 @@ class Manager
 
 		return array_merge(
 			[
-				static::EXPORT_SERVICE_LIGACOM_FEED,
-				static::EXPORT_SERVICE_BERU_RU
+				static::EXPORT_SERVICE_GOOGLE_MERCHANT
 			],
 			array_keys($customServiceList)
 		);
@@ -59,7 +57,7 @@ class Manager
 
 		switch ($service)
 		{
-			case static::EXPORT_SERVICE_LIGACOM_FEED:
+			case static::EXPORT_SERVICE_GOOGLE_MERCHANT:
 				$result = [
 					static::EXPORT_FORMAT_VENDOR_MODEL,
 					static::EXPORT_FORMAT_SIMPLE,
@@ -70,12 +68,6 @@ class Manager
 					static::EXPORT_FORMAT_MEDICINE,
 					static::EXPORT_FORMAT_TOUR,
 					static::EXPORT_FORMAT_ALCO
-				];
-			break;
-
-			case static::EXPORT_SERVICE_BERU_RU:
-				$result = [
-					static::EXPORT_FORMAT_VENDOR_MODEL
 				];
 			break;
 

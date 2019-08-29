@@ -480,7 +480,10 @@ class Base extends Xml\Reference\Node
 
 		if ($this->hasEmptyValue)
 		{
-			$result = $parent->addChild($tagName);
+
+                $result = $parent->addChild($tagName);
+
+
 		}
 		else
 		{
@@ -488,8 +491,12 @@ class Base extends Xml\Reference\Node
 
 			$result = $parent->addChild($tagName, $valueExport);
 		}
-
-		return $result;
+/*        if(count($this->parameters['xpath_namespace']) > 0) {
+            foreach ($this->parameters['xpath_namespace'] as $pathPrefix=>$xpathNamespace) {
+                $result->registerXPathNamespace($pathPrefix, $xpathNamespace);
+            }
+        }*/
+        return $result;
 	}
 
 	/**
