@@ -13,7 +13,7 @@ $component->showErrors();
 if ($arResult['EXCEPTION_MIGRATION'])
 {
 	?>
-	<form method="post" action="yamarket_migration.php?lang=<?= LANGUAGE_ID ?>">
+	<form method="post" action="ligacom_feed_migration.php?lang=<?= LANGUAGE_ID ?>">
 		<?= bitrix_sessid_post(); ?>
 		<button class="adm-btn" type="submit" name="run" value="Y"><?= Loc::getMessage('LIGACOM_FEED_T_ADMIN_FORM_EDIT_GO_MIGRATION'); ?></button>
 	</form>

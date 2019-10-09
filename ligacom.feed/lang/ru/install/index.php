@@ -1,7 +1,7 @@
 <?php
 
-$MESS['LIGACOM_FEED_MODULE_NAME'] = 'Подготовка прайс-листа для Google Merchant';
-$MESS['LIGACOM_FEED_MODULE_DESCRIPTION'] = 'Модуль предназначен для автоматической выгрузки прайс-листа для Google Merchant';
+$MESS['LIGACOM_FEED_MODULE_NAME'] = 'Фид для Google Merchant';
+$MESS['LIGACOM_FEED_MODULE_DESCRIPTION'] = 'Модуль предназначен для автоматической выгрузки прайс-листа в формате xml для Google Merchant';
 $MESS['LIGACOM_FEED_PARTNER_NAME'] = 'Лигаком.фид';
 $MESS['LIGACOM_FEED_PARTNER_URI'] = '';
 $MESS['LIGACOM_FEED_MODULE_NOT_REGISTERED'] = 'Не удалось зарегистрировать модуль';

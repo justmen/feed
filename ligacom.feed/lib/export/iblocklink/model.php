@@ -206,14 +206,6 @@ class Model extends Feed\Reference\Storage\Model
 
 		$result += $this->getIblockContext();
 
-		// sales notes
-
-		$salesNotes = $this->getSalesNotes();
-
-		if (strlen($salesNotes) > 0)
-		{
-			$result['SALES_NOTES'] = $salesNotes;
-		}
 
 		// delivery options
 
@@ -268,10 +260,6 @@ class Model extends Feed\Reference\Storage\Model
 		return $deliveryCollection->getDeliveryOptions();
 	}
 
-	public function getSalesNotes()
-	{
-		return trim($this->getField('SALES_NOTES'));
-	}
 
 	public function getIblockId()
 	{

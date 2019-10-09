@@ -347,8 +347,6 @@ $APPLICATION->AddHeadScript('/bitrix/js/ligacom.feed/plugin/manager.js');
 $APPLICATION->AddHeadScript('/bitrix/js/ligacom.feed/ui/admin/exportform.js');
 $APPLICATION->AddHeadScript('/bitrix/js/ligacom.feed/ui/input/copyclipboard.js');
 
-Ligacom\Feed\Metrika::reachGoal('generate_YML');
-
 $tabs = [
 	[ 'DIV' => 'common', 'TAB' => Feed\Config::getLang('ADMIN_SETUP_RUN_TAB_COMMON') ]
 ];

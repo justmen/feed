@@ -35,13 +35,7 @@ class Manager
 	{
 		return [
 			static::STEP_ROOT,
-			static::STEP_OFFER,
-			static::STEP_CATEGORY,
-			static::STEP_CURRENCY,
-			static::STEP_PROMO_PRODUCT,
-			static::STEP_PROMO_GIFT,
-            static::STEP_GIFT,
-			static::STEP_PROMO,
+			static::STEP_OFFER
 		];
 	}
 
@@ -49,23 +43,16 @@ class Manager
 	{
 		return [
 			static::STEP_ROOT => 5,
-			static::STEP_OFFER => 65,
-			static::STEP_CATEGORY => 5,
-			static::STEP_CURRENCY => 5,
-            static::STEP_PROMO_PRODUCT => 5,
-            static::STEP_PROMO_GIFT => 5,
-            static::STEP_GIFT => 5,
-            static::STEP_PROMO => 5,
+			static::STEP_OFFER => 65
 		];
 	}
 
-	/**
-	 * @param $stepName
-	 * @param Processor $processor
-	 *
-	 * @return Steps\Base
-	 * @throws \Bitrix\Main\SystemException
-	 */
+    /**
+     * @param $stepName
+     * @param Processor $processor
+     * @return Steps\Offer|Steps\Root|null
+     * @throws Main\SystemException
+     */
 	public static function getStepProvider($stepName, Processor $processor)
 	{
 		$result = null;
@@ -78,30 +65,6 @@ class Manager
 
 			case static::STEP_OFFER:
 				$result = new Steps\Offer($processor);
-			break;
-
-			case static::STEP_CATEGORY:
-				$result = new Steps\Category($processor);
-			break;
-
-			case static::STEP_CURRENCY:
-				$result = new Steps\Currencies($processor);
-			break;
-
-			case static::STEP_PROMO_PRODUCT:
-				$result = new Steps\PromoProduct($processor);
-			break;
-
-			case static::STEP_PROMO_GIFT:
-				$result = new Steps\PromoGift($processor);
-			break;
-
-			case static::STEP_PROMO:
-				$result = new Steps\Promo($processor);
-			break;
-
-			case static::STEP_GIFT:
-				$result = new Steps\Gift($processor);
 			break;
 
 			default:

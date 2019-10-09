@@ -386,7 +386,7 @@ class Data
 			'datetime' => static::TYPE_DATETIME,
 			'iblock_element' => static::TYPE_IBLOCK_ELEMENT,
 			'iblock_section' => static::TYPE_IBLOCK_SECTION,
-			'ym_service_category' => static::TYPE_SERVICE_CATEGORY
+			'ym_service_category' => static::TYPE_SERVICE_CATEGORY //todo убрать ym
 		];
 
 		return isset($map[$userTypeId]) ? $map[$userTypeId] : static::TYPE_STRING;

@@ -18,7 +18,7 @@ foreach ($specialFields as $specialFieldKey)
 		$fieldTitle = $component->getFieldTitle($field);
 		$fieldValue = $component->getFieldValue($field);
 		$shopParams = [
-			'NAME',
+			'TITLE',
 			'COMPANY'
 		];
 

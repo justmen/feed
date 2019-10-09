@@ -57,25 +57,17 @@ class Table extends Feed\Reference\Storage\Table
 				'format' => '/^[0-9A-Za-z-_.]+$/',
 				'size' => 20
 			]),
-			new Main\Entity\StringField('SALES_NOTES', [
-				'size' => 50
-			]),
 			new Main\Entity\ReferenceField('IBLOCK_LINK', Feed\Export\IblockLink\Table::getClassName(), [
 				'=this.ID' => 'ref.SETUP_ID'
 			]),
 			new Main\Entity\ReferenceField('IBLOCK', 'Bitrix\Iblock\Iblock', [
 				'=this.IBLOCK_LINK.IBLOCK_ID' => 'ref.ID',
 			]),
-			new Main\Entity\ReferenceField('DELIVERY', Feed\Export\Delivery\Table::getClassName(), [
-				'=this.ID' => 'ref.ENTITY_ID',
-				'=ref.ENTITY_TYPE' => ['?', Feed\Export\Delivery\Table::ENTITY_TYPE_SETUP],
-			]),
+
 			new Main\Entity\TextField('SHOP_DATA', [
 				'serialized' => true
 			]),
-            new Main\Entity\ReferenceField('PROMO_LINK', Feed\Export\Promo\Internals\SetupLinkTable::getClassName(), [
-                '=this.ID' => 'ref.SETUP_ID'
-            ])
+
 		];
 	}
 
@@ -197,8 +189,6 @@ class Table extends Feed\Reference\Storage\Table
 	}
 
 	/**
-	 * ���� = ���� �����
-	 * �������� = ������� FILTER => ������, LINK => ���� ��� �����
 	 *
 	 * @param int|int[]|null $primary
 	 *
@@ -214,14 +204,7 @@ class Table extends Feed\Reference\Storage\Table
 					'SETUP_ID' => $primary,
 				],
 			],
-			'DELIVERY' => [
-				'TABLE' => Feed\Export\Delivery\Table::getClassName(),
-				'LINK_FIELD' => 'ENTITY_ID',
-				'LINK' => [
-					'ENTITY_TYPE' => Feed\Export\Delivery\Table::ENTITY_TYPE_SETUP,
-					'ENTITY_ID' => $primary,
-				],
-			]
+
 		];
 	}
 
@@ -309,10 +292,6 @@ class Table extends Feed\Reference\Storage\Table
 			Feed\Export\Run\Storage\CategoryTable::getClassName(),
 			Feed\Export\Run\Storage\CurrencyTable::getClassName(),
 			Feed\Export\Run\Storage\OfferTable::getClassName(),
-			Feed\Export\Run\Storage\PromoProductTable::getClassName(),
-			Feed\Export\Run\Storage\PromoGiftTable::getClassName(),
-			Feed\Export\Run\Storage\GiftTable::getClassName(),
-			Feed\Export\Run\Storage\PromoTable::getClassName(),
 		];
 
 		foreach ($runDataClassList as $runDataClass)

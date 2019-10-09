@@ -6,7 +6,7 @@ use Ligacom\Feed;
 
 class Base
 {
-	protected $isErrorStrict = true;
+	protected $isErrorStrict = false; //todo здесь строгий режим для нодов
 	protected $isSuccess = true;
 	/** @var Ligacom\Feed\Error\Base[] */
 	protected $errors;

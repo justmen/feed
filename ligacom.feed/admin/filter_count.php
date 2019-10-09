@@ -38,7 +38,7 @@ try
 
 	if (!Main\Application::isUtfMode())
 	{
-		$iblockLinkList = Main\Text\Encoding::convertEncodingArray($iblockLinkList, 'UTF-8', LANG_CHARSET);
+		$iblockLinkList = Main\Text\Encoding::convertEncoding($iblockLinkList, 'UTF-8', LANG_CHARSET);
 	}
 
 	foreach ($iblockLinkList as &$iblockLink)
@@ -51,8 +51,8 @@ try
 	unset($iblockLink);
 
 	$setupFields = [
-		'EXPORT_SERVICE' => Feed\Export\Xml\Format\Manager::EXPORT_SERVICE_LIGACOM_FEED,
-		'EXPORT_FORMAT' => Feed\Export\Xml\Format\Manager::EXPORT_FORMAT_VENDOR_MODEL,
+		'EXPORT_SERVICE' => $request->getPost('EXPORT_SERVICE'),
+		'EXPORT_FORMAT' => $request->getPost('EXPORT_FORMAT'),
 		'IBLOCK_LINK' => $iblockLinkList
 	];
 
@@ -69,5 +69,3 @@ catch (Main\SystemException $exception)
 $APPLICATION->RestartBuffer();
 echo Feed\Utils::jsonEncode($response, JSON_UNESCAPED_UNICODE);
 die();
-
-require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/epilog_admin_after.php';

@@ -11,16 +11,6 @@ class Manager
 {
 	const EXPORT_SERVICE_GOOGLE_MERCHANT = 'Google.Merchant';
 
-	const EXPORT_FORMAT_SIMPLE = 'simple';
-	const EXPORT_FORMAT_VENDOR_MODEL = 'vendor.model';
-	const EXPORT_FORMAT_BOOK = 'book';
-	const EXPORT_FORMAT_AUDIOBOOK = 'audiobook';
-	const EXPORT_FORMAT_ARTIST_TITLE = 'artist.title';
-	const EXPORT_FORMAT_EVENT_TICKET = 'event-ticket';
-	const EXPORT_FORMAT_MEDICINE = 'medicine';
-	const EXPORT_FORMAT_TOUR = 'tour';
-	const EXPORT_FORMAT_ALCO = 'alco';
-
 	protected static $customServiceList;
 
 	public static function getServiceList()
@@ -59,15 +49,7 @@ class Manager
 		{
 			case static::EXPORT_SERVICE_GOOGLE_MERCHANT:
 				$result = [
-					static::EXPORT_FORMAT_VENDOR_MODEL,
-					static::EXPORT_FORMAT_SIMPLE,
-					static::EXPORT_FORMAT_BOOK,
-					static::EXPORT_FORMAT_AUDIOBOOK,
-					static::EXPORT_FORMAT_ARTIST_TITLE,
-					static::EXPORT_FORMAT_EVENT_TICKET,
-					static::EXPORT_FORMAT_MEDICINE,
-					static::EXPORT_FORMAT_TOUR,
-					static::EXPORT_FORMAT_ALCO
+					static::EXPORT_SERVICE_GOOGLE_MERCHANT
 				];
 			break;
 
@@ -84,11 +66,12 @@ class Manager
 		return $result;
 	}
 
-	/**
-	 * @param $type string
-	 *
-	 * @return Reference\Base
-	 */
+    /**
+     * @param $service
+     * @param $type
+     * @return null
+     * @throws Main\ObjectNotFoundException
+     */
 	public static function getEntity($service, $type)
 	{
 		$result = null;

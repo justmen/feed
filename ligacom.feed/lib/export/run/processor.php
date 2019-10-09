@@ -50,12 +50,14 @@ class Processor
 		}
 	}
 
-	/**
-	 * @param $action string
-	 *
-	 * @return Feed\Result\StepProcessor
-	 * @throws \Bitrix\Main\SystemException
-	 */
+    /**
+     * @param string $action
+     * @return Feed\Result\StepProcessor
+     * @throws Main\ArgumentException
+     * @throws Main\LoaderException
+     * @throws Main\ObjectNotFoundException
+     * @throws Main\SystemException
+     */
 	public function run($action = 'full')
 	{
 		$result = new Feed\Result\StepProcessor();
@@ -71,6 +73,7 @@ class Processor
 
 		foreach ($steps as $stepName)
 		{
+		    //
 			$isRequestStep = (
 				(!$hasRequestStep && !$isFoundRequestStep)
 				|| $requestStep === $stepName
@@ -97,7 +100,7 @@ class Processor
 				}
 
 				// process step
-
+                //создаем класс нужного шага
 				$step = Manager::getStepProvider($stepName, $this);
 
 				if ($step->validateAction($action))

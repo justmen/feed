@@ -33,7 +33,6 @@ else if (!Main\Loader::includeModule('ligacom.feed'))
 }
 else
 {
-	Ligacom\Feed\Metrika::load();
 
 	$APPLICATION->IncludeComponent('ligacom.feed:admin.grid.list', '', array(
 		'GRID_ID' => 'LIGACOM_FEED_ADMIN_LOG',

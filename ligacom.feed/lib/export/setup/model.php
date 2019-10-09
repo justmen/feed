@@ -143,38 +143,10 @@ class Model extends Feed\Reference\Storage\Model
 			'SHOP_DATA' => $this->getShopData()
 		];
 
-		// sales notes
-
-		$salesNotes = $this->getSalesNotes();
-
-		if (strlen($salesNotes) > 0)
-		{
-			$result['SALES_NOTES'] = $salesNotes;
-		}
-
-		// delivery options
-
-		$deliveryOptions = $this->getDeliveryOptions();
-
-		if (!empty($deliveryOptions))
-		{
-			$result['DELIVERY_OPTIONS'] = $deliveryOptions;
-		}
 
 		return $result;
 	}
 
-	public function getDeliveryOptions()
-	{
-		$deliveryCollection = $this->getDeliveryCollection();
-
-		return $deliveryCollection->getDeliveryOptions();
-	}
-
-	public function getSalesNotes()
-	{
-		return trim($this->getField('SALES_NOTES'));
-	}
 
 	public function getShopData()
 	{
@@ -273,29 +245,15 @@ class Model extends Feed\Reference\Storage\Model
 		return $result;
 	}
 
-	/**
-	 * @return Feed\Export\IblockLink\Collection
-	 */
+    /**
+     * @return Feed\Reference\Storage\Collection
+     * @throws Main\SystemException
+     */
 	public function getIblockLinkCollection()
 	{
 		return $this->getChildCollection('IBLOCK_LINK');
 	}
 
-	/**
-	 * @return Feed\Export\Delivery\Collection
-	 */
-	public function getDeliveryCollection()
-	{
-		return $this->getChildCollection('DELIVERY');
-	}
-
-    /**
-     * @return Feed\Export\Promo\Collection
-     */
-    public function getPromoCollection()
-    {
-        return $this->getChildCollection('PROMO');
-    }
 
 	protected function getChildCollectionReference($fieldKey)
 	{
@@ -307,13 +265,6 @@ class Model extends Feed\Reference\Storage\Model
 				$result = Feed\Export\IblockLink\Collection::getClassName();
 			break;
 
-			case 'DELIVERY':
-				$result = Feed\Export\Delivery\Collection::getClassName();
-			break;
-
-            case 'PROMO':
-                $result = Feed\Export\Promo\Collection::getClassName();
-            break;
 		}
 
 		return $result;
@@ -325,14 +276,6 @@ class Model extends Feed\Reference\Storage\Model
 
         switch ($fieldKey)
         {
-            case 'PROMO':
-				$result['distinct'] = true;
-                $result['filter'] = [
-                    'LOGIC' => 'OR',
-                    [ 'SETUP_LINK.SETUP_ID' => $this->getId() ],
-                    [ 'SETUP_EXPORT_ALL' => Feed\Export\Promo\Table::BOOLEAN_Y ]
-                ];
-            break;
 
             default:
                 $result = parent::getChildCollectionQueryParameters($fieldKey);

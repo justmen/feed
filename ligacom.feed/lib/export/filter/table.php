@@ -8,8 +8,6 @@ use Ligacom\Feed;
 class Table extends Feed\Reference\Storage\Table
 {
 	const ENTITY_TYPE_IBLOCK_LINK = 'iblock_link';
-	const ENTITY_TYPE_PROMO_PRODUCT = 'promo_product';
-	const ENTITY_TYPE_PROMO_GIFT = 'promo_gift';
 
 	public static function getTableName()
 	{
@@ -39,13 +37,10 @@ class Table extends Feed\Reference\Storage\Table
 			new Main\Entity\IntegerField('SORT', [
 				'default_value' => 500
 			]),
-			new Main\Entity\StringField('SALES_NOTES'),
 			new Main\Entity\EnumField('ENTITY_TYPE', [
 				'default_value' => static::ENTITY_TYPE_IBLOCK_LINK,
 				'values' => [
 					static::ENTITY_TYPE_IBLOCK_LINK,
-					static::ENTITY_TYPE_PROMO_PRODUCT,
-					static::ENTITY_TYPE_PROMO_GIFT,
 				]
 			]),
 			new Main\Entity\IntegerField('ENTITY_ID', [
@@ -57,15 +52,6 @@ class Table extends Feed\Reference\Storage\Table
 				'=this.ENTITY_ID' => 'ref.ID',
 			]),
 
-			new Main\Entity\ReferenceField('PROMO_PRODUCT', Feed\Export\Promo\Table::getClassName(), [
-				'=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_PROMO_PRODUCT ],
-				'=this.ENTITY_ID' => 'ref.ID',
-			]),
-
-			new Main\Entity\ReferenceField('PROMO_GIFT', Feed\Export\Promo\Table::getClassName(), [
-				'=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_PROMO_GIFT ],
-				'=this.ENTITY_ID' => 'ref.ID',
-			]),
 		];
 	}
 
@@ -79,14 +65,6 @@ class Table extends Feed\Reference\Storage\Table
 					'FILTER_ID' => $primary
 				]
 			],
-			'DELIVERY' => [
-				'TABLE' => Feed\Export\Delivery\Table::getClassName(),
-				'LINK_FIELD' => 'ENTITY_ID',
-				'LINK' => [
-					'ENTITY_TYPE' => Feed\Export\Delivery\Table::ENTITY_TYPE_FILTER,
-					'ENTITY_ID' => $primary
-				]
-			]
 		];
 	}
 

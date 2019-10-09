@@ -91,7 +91,6 @@ if (!empty($arResult['ITEM']['IBLOCK_LINK']))
 										'EXPORT_LEFT_MESSAGE' => $exportAllField ? $iblockLinkBaseName . 'LEFT_MESSAGE' : null,
 										'REFRESH_COUNT_ON_LOAD' => $isActiveTab,
 										'ALLOW_NAME' => 'Y',
-										'ALLOW_SALES_NOTES' => 'Y',
 										'ALLOW_DELIVERY_OPTIONS' => !empty($arResult['FORMAT_DATA']['SUPPORT_DELIVERY_OPTIONS']) ? 'Y' : 'N',
 										'NEED_LEFT_COUNT' => 'Y'
 									]);

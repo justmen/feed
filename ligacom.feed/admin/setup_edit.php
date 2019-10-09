@@ -24,7 +24,6 @@ else if (!Main\Loader::includeModule('ligacom.feed'))
 }
 else
 {
-	Ligacom\Feed\Metrika::load();
 
 	$APPLICATION->IncludeComponent('ligacom.feed:admin.form.edit', '', [
 		'TITLE' => Feed\Config::getLang('SETUP_EDIT_TITLE_EDIT'),
@@ -48,9 +47,6 @@ else
 		'TABS' => [
 			[
 				'name' => Feed\Config::getLang('SETUP_EDIT_TAB_COMMON'),
-				'data' => [
-					'METRIKA_GOAL' => 'select_infoblocks'
-				],
 				'fields' => [
 					'NAME',
 					'DOMAIN',
@@ -60,7 +56,6 @@ else
 					'EXPORT_FORMAT',
 					'SHOP_DATA',
 					'IBLOCK',
-					'ENABLE_AUTO_DISCOUNTS',
 					'AUTOUPDATE',
 					'REFRESH_PERIOD',
 				]
@@ -69,7 +64,7 @@ else
 				'name' => Feed\Config::getLang('SETUP_EDIT_TAB_PARAM'),
 				'layout' => 'setup-param',
 				'data' => [
-					'METRIKA_GOAL' => 'infoblock_matching'
+
 				],
 				'fields' => [
 					'IBLOCK_LINK.PARAM'
@@ -80,12 +75,10 @@ else
 				'layout' => 'setup-filter',
 				'final' => true,
 				'data' => [
-					'METRIKA_GOAL' => 'delivery_options'
+
 				],
 				'fields' => [
-					'DELIVERY',
-					'SALES_NOTES',
-					'IBLOCK_LINK.DELIVERY',
+
 					'IBLOCK_LINK.SALES_NOTES',
 					'IBLOCK_LINK.FILTER',
 					'IBLOCK_LINK.EXPORT_ALL',

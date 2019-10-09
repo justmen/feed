@@ -59,7 +59,7 @@ if ($arParams['ALLOW_NAME'])
 		?>
 	</div>
 	<?
-	if ($arParams['ALLOW_DELIVERY_OPTIONS'] || $arParams['ALLOW_SALES_NOTES'])
+	if ($arParams['ALLOW_DELIVERY_OPTIONS'])
 	{
 		?>
 		<div class="b-form-panel__section fill--primary">
@@ -76,19 +76,6 @@ if ($arParams['ALLOW_NAME'])
 						'CHILD_CLASS_NAME'  => 'js-filter-item__child',
 						'GROUP_OUTSIDE' => 'Y',
 						'EDIT_BUTTON_TITLE' => $langStatic['DELIVERY_EDIT_BUTTON'],
-					]);
-				}
-
-				if ($arParams['ALLOW_SALES_NOTES'])
-				{
-					$APPLICATION->IncludeComponent('ligacom.feed:admin.form.field', 'salesnotes', [
-						'INPUT_NAME' => $itemInputName . '[SALES_NOTES]',
-						'VALUE' => $itemValue['SALES_NOTES'],
-						'MULTIPLE' => 'N',
-						'PLACEHOLDER' => $isItemPlaceholder ? 'Y' : 'N',
-						'CHILD' => 'Y',
-						'CHILD_CLASS_NAME'  => 'js-filter-item__input',
-						'SALES_NOTES_TIP' => Loc::getMessage('LIGACOM_FEED_T_ADMIN_FIELD_FILTER_SALES_NOTES_FILTER')
 					]);
 				}
 				?>

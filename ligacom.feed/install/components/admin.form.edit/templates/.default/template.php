@@ -42,10 +42,6 @@ if ($arParams['FORM_BEHAVIOR'] === 'steps')
 	{
 		if ($tab['STEP'] === $arResult['STEP'])
 		{
-			if (isset($tab['DATA']['METRIKA_GOAL']))
-			{
-				Ligacom\Feed\Metrika::reachGoal($tab['DATA']['METRIKA_GOAL']);
-			}
 
 			$_REQUEST[$arParams['FORM_ID'] . '_active_tab'] = $tab['DIV'];
 			break;

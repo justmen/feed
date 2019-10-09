@@ -232,8 +232,11 @@ class Offer extends Base
 		$result = new Feed\Result\Step();
 
 		$this->setRunAction($action);
-
+        //todo понять откуда берется конфиг
 		$iblockConfigList = $this->getIblockConfigList();
+
+		//мой кусок для разбиения по пробелу одиночных элементов
+        //todo переписать - сделать нормально и прозрачнее
         foreach ($iblockConfigList[0]['FILTER_LIST'][0]['FILTER']['iblock_element_property'] as $kPropertyFilter=>$iblockLinkFilter) {
 
 
@@ -250,9 +253,8 @@ class Offer extends Base
                         $iblockConfigList[0]['FILTER_LIST'][0]['FILTER']['iblock_element_property'][$kPropertyFilter]['VALUE'][]  = $addCondition;
                     }
                 }
-
-
         }
+        //end мой кусок
 		$formatTag = $this->getTag();
 
 		// calculate offset and total
@@ -288,13 +290,13 @@ class Offer extends Base
 
 		foreach ($iblockConfigList as $iblockConfig)
 		{
-			if ($offsetIblockConfigIndex !== null && $offsetIblockConfigIndex > $iblockConfigIndex) // is iblock out of offset
+			if ($offsetIblockConfigIndex !== null && $offsetIblockConfigIndex > $iblockConfigIndex) // is iblock coffset
 			{
 				$result->increaseProgress($iblockConfigWeightList[$iblockConfigIndex]);
 				$iblockConfigIndex++;
 				continue;
 			}
-
+            //todo что такое TAG_DESCRIPTION_LIST и как формируется?
 			$tagDescriptionList = $iblockConfig['TAG_DESCRIPTION_LIST'];
 			$iblockContext = $iblockConfig['CONTEXT'];
 			$iblockLimit = (isset($iblockConfig['LIMIT']) ? (int)$iblockConfig['LIMIT'] : null);

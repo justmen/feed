@@ -48,14 +48,10 @@ class Controller
 		}
 	}
 
-	/**
-	 * ���������� ������ ���� ���������� ���������� Event,
-	 * ������������ ��� ����������� ���� ������������ � updateRegular().
-	 *
-	 * @param string �������� ������, ���������� �������� ���� �������
-	 *
-	 * @return array ������ ��� ������� ��� ������
-	 * */
+    /**
+     * @param $baseClassName
+     * @return array
+     */
 	protected static function getClassList($baseClassName)
 	{
 		$baseDir = Config::getModulePath();

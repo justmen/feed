@@ -175,9 +175,11 @@ abstract class Base
 	 */
 	protected function writeData($tagValuesList, $elementList, array $context = [], array $data = null, $limit = null)
 	{
-		$this->extendData($tagValuesList, $elementList, $context, $data);
 
-	$tagResultList = $this->buildTagList($tagValuesList, $context);
+		//todo сейчас этот функционал не используется - можно использовать для дополнительной обработки полей шага
+       	$this->extendData($tagValuesList, $elementList, $context, $data);
+
+	    $tagResultList = $this->buildTagList($tagValuesList, $context);
 
 		$this->writeDataUserEvent($tagResultList, $elementList, $context, $data);
 
@@ -235,14 +237,12 @@ abstract class Base
 		$event->send();
 	}
 
-	/**
-	 * ���������� ����
-	 *
-	 * @param Ligacom\Feed\Result\XmlValue[] $tagValuesList
-	 * @param array                    $context
-	 *
-	 * @return Feed\Result\XmlNode[]
-	 */
+    /**
+     * @param $tagValuesList
+     * @param array $context
+     * @return array
+     * @throws Main\ObjectNotFoundException
+     */
 	protected function buildTagList($tagValuesList, array $context = [])
 	{
 		$document = null;
@@ -267,7 +267,6 @@ abstract class Base
 	}
 
 	/**
-	 * ������ ���������
 	 *
 	 * @return array|null
 	 */
@@ -279,7 +278,6 @@ abstract class Base
 	}
 
 	/**
-	 * ��������� ������ ��������� �� �������� ����
 	 *
 	 * @param $changes
 	 *
@@ -305,7 +303,6 @@ abstract class Base
 	}
 
 	/**
-	 * ������ ����� ���������, ������� ������������ ������ ����
 	 *
 	 * @return array|null
 	 */
@@ -314,12 +311,13 @@ abstract class Base
 		return null;
 	}
 
-	/**
-	 * ���������������� ������� ��� ����������� ���������� ���� ����� $tagResultList
-	 *
-	 * @param $dataList
-	 * @param $tagResultList Feed\Result\XmlNode[]
-	 */
+
+    /**
+     * @param Feed\Result\XmlNode[] $tagResultList
+     * @param $elementList
+     * @param array $context
+     * @param array|null $data
+     */
 	protected function writeDataUserEvent($tagResultList, $elementList, array $context = [], array $data = null)
 	{
 		$stepName = $this->getName();
@@ -341,7 +339,7 @@ abstract class Base
 	}
 
 	/**
-	 * ����� ��������� ����������� ����
+
 	 *
 	 * @return Feed\Reference\Storage\Table
 	 */
@@ -351,7 +349,7 @@ abstract class Base
 	}
 
 	/**
-	 * �������� ���� ������ � ��������� ����������� ��������
+	 *
 	 *
 	 * @return array
 	 */
@@ -364,7 +362,7 @@ abstract class Base
 	}
 
 	/**
-	 * ������ runtime ��� �������� � ��������� �����������
+	 *
 	 *
 	 * @return array
 	 */
@@ -424,13 +422,10 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ������� ��������� ����������� �������� ���������
-	 *
-	 * @param $context
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @param $context
+     * @throws \Exception
+     */
 	protected function clearDataStorage($context)
 	{
 		$dataClass = $this->getStorageDataClass();

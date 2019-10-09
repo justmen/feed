@@ -24,11 +24,6 @@ foreach ($specialFields as $specialFieldKey)
 
 		if ($isExportAllField)
 		{
-			$isExportAll = ($component->getFieldValue($field) === Feed\Export\Promo\Table::BOOLEAN_Y);
-		}
-
-		if ($isExportAllField)
-		{
 			?>
 			<tr class="js-plugin" data-plugin="Ui.Input.CheckToggle" data-input-element="input[type='checkbox']" data-target-element=".js-setup-link-target" data-inverse="true">
 			<?

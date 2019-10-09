@@ -19,8 +19,6 @@ class Manager
 	const TYPE_VAT = 'vat';
 	const TYPE_BARCODE = 'barcode';
 	const TYPE_AGE = 'age';
-	const TYPE_AGE_GROUP = 'age_group';
-	const TYPE_COLOR = 'color';
 	const TYPE_DIMENSIONS = 'dimensions';
 	const TYPE_RECORDING_LENGTH = 'recordinglength';
 	const TYPE_CONDITION = 'condition';

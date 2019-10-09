@@ -118,15 +118,6 @@ class Model extends Feed\Reference\Storage\Model
 			'FILTER_ID' => $this->getId()
 		];
 
-		// sales notes
-
-		$salesNotes = $this->getSalesNotes();
-
-		if (strlen($salesNotes) > 0)
-		{
-			$result['SALES_NOTES'] = $salesNotes;
-		}
-
 		// delivery options
 
 		$deliveryOptions = $this->getDeliveryOptions();
@@ -166,14 +157,11 @@ class Model extends Feed\Reference\Storage\Model
 		return $deliveryCollection->getDeliveryOptions();
 	}
 
-	public function getSalesNotes()
-	{
-		return trim($this->getField('SALES_NOTES'));
-	}
 
-	/**
-	 * @return Feed\Export\FilterCondition\Collection
-	 */
+    /**
+     * @return Feed\Reference\Storage\Collection
+     * @throws \Bitrix\Main\SystemException
+     */
 	public function getConditionCollection()
 	{
 		return $this->getChildCollection('FILTER_CONDITION');

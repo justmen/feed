@@ -102,48 +102,6 @@ class Table extends Feed\Reference\Storage\Table
 
 			new Main\Entity\ExpressionField('OFFER_ID', '%s', 'RUN_OFFER.ELEMENT_ID'),
 
-            // GIFT_ID
-
-            new Main\Entity\ReferenceField('RUN_GIFT', Feed\Export\Run\Storage\PromoGiftTable::getClassName(), [
-                '=this.ENTITY_PARENT' => 'ref.SETUP_ID',
-                [
-                    'LOGIC' => 'OR',
-                    [
-                        '=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_EXPORT_RUN_GIFT ],
-                        '=this.ENTITY_ID' => 'ref.ELEMENT_ID',
-                    ],
-                    [
-                        '=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_EXPORT_RUN_PROMO_GIFT ],
-                        '=this.ENTITY_ID_PART2' => 'ref.ELEMENT_ID',
-                    ]
-                ]
-            ]),
-
-            new Main\Entity\ExpressionField('GIFT_ID', '%s', 'RUN_GIFT.ELEMENT_ID'),
-
-            // PROMO_ID
-
-            new Main\Entity\ReferenceField('RUN_PROMO', Feed\Export\Run\Storage\PromoTable::getClassName(), [
-                '=this.ENTITY_PARENT' => 'ref.SETUP_ID',
-                [
-                    'LOGIC' => 'OR',
-                    [
-                        '=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_EXPORT_RUN_PROMO ],
-                        '=this.ENTITY_ID' => 'ref.ELEMENT_ID',
-                    ],
-                    [
-                        '=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_EXPORT_RUN_PROMO_PRODUCT ],
-                        '=this.ENTITY_ID_PART1' => 'ref.ELEMENT_ID',
-                    ],
-                    [
-                        '=this.ENTITY_TYPE' => [ '?', static::ENTITY_TYPE_EXPORT_RUN_PROMO_GIFT ],
-                        '=this.ENTITY_ID_PART1' => 'ref.ELEMENT_ID',
-                    ],
-                ]
-            ]),
-
-            new Main\Entity\ExpressionField('PROMO_ID', '%s', 'RUN_PROMO.ELEMENT_ID'),
-
             // SETUP
 
 			new Main\Entity\ReferenceField('SETUP', Feed\Export\Setup\Table::getClassName(), [
@@ -204,10 +162,6 @@ class Table extends Feed\Reference\Storage\Table
                 static::ENTITY_TYPE_EXPORT_RUN_OFFER,
                 static::ENTITY_TYPE_EXPORT_RUN_CATEGORY,
                 static::ENTITY_TYPE_EXPORT_RUN_CURRENCY,
-                static::ENTITY_TYPE_EXPORT_RUN_PROMO_PRODUCT,
-                static::ENTITY_TYPE_EXPORT_RUN_PROMO_GIFT,
-                static::ENTITY_TYPE_EXPORT_RUN_PROMO,
-                static::ENTITY_TYPE_EXPORT_RUN_GIFT,
                 static::ENTITY_TYPE_EXPORT_AGENT,
             ];
 
@@ -225,24 +179,11 @@ class Table extends Feed\Reference\Storage\Table
 			$result['SETUP']['USER_TYPE']['CLASS_NAME'] = 'Ligacom\Feed\Ui\UserField\SetupType';
 		}
 
-		if (isset($result['PROMO_ID']))
-		{
-            $result['PROMO_ID']['USER_TYPE'] = $USER_FIELD_MANAGER->GetUserType('enumeration');
-			$result['PROMO_ID']['USER_TYPE']['CLASS_NAME'] = 'Ligacom\Feed\Ui\UserField\PromoType';
-            $result['PROMO_ID']['SETTINGS']  = [
-                'DATA_CLASS' => Feed\Export\Promo\Table::getClassName()
-            ];
-		}
-
 		if (isset($result['OFFER_ID']))
 		{
 			$result['OFFER_ID']['USER_TYPE']['CLASS_NAME'] = 'Ligacom\Feed\Ui\UserField\IblockElementType';
 		}
 
-		if (isset($result['GIFT_ID']))
-		{
-			$result['GIFT_ID']['USER_TYPE']['CLASS_NAME'] = 'Ligacom\Feed\Ui\UserField\IblockElementType';
-		}
 
 		return $result;
 	}

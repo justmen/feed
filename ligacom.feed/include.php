@@ -9,10 +9,6 @@
 	'\Ligacom\Feed\Export\ParamValue\Table' => '/lib/export/paramvalue/table.php',
 	'\Ligacom\Feed\Export\Filter\Table' => '/lib/export/filter/table.php',
 	'\Ligacom\Feed\Export\FilterCondition\Table' => '/lib/export/filtercondition/table.php',
-	'\Ligacom\Feed\Export\Delivery\Table' => '/lib/export/delivery/table.php',
-	'\Ligacom\Feed\Export\Promo\Table' => '/lib/export/promo/table.php',
-	'\Ligacom\Feed\Export\PromoProduct\Table' => '/lib/export/promoproduct/table.php',
-	'\Ligacom\Feed\Export\PromoGift\Table' => '/lib/export/promogift/table.php',
 	'\Ligacom\Feed\Export\Track\Table' => '/lib/export/track/table.php',
 	'\Ligacom\Feed\Logger\Table' => '/lib/logger/table.php',
 ]);

@@ -17,6 +17,7 @@ abstract class Node
 	protected $isRequired;
 	/** @var string */
 	protected $name;
+
 	/** @var string */
 	protected $id;
 	/** @var string */
@@ -54,6 +55,7 @@ abstract class Node
 		$this->isVisible = !empty($parameters['visible']);
 		$this->valueType = !empty($parameters['value_type']) ? $parameters['value_type'] : 'string';
 		$this->maxLength = isset($parameters['max_length']) ? (int)$parameters['max_length'] : null;
+
 	}
 
 	abstract public function getLangKey();
@@ -69,7 +71,6 @@ abstract class Node
 	}
 
 	/**
-	 * ���������
 	 *
 	 * @param $key
 	 *
@@ -81,7 +82,7 @@ abstract class Node
 	}
 
 	/**
-	 * ������������ �� ���� ��-��������� �� ������� ������������� �����
+	 *
 	 *
 	 * @return bool
 	 */
@@ -208,18 +209,15 @@ abstract class Node
 		return $this->maxLength;
 	}
 
-	/**
-	 * ��������� ��������
-	 *
-	 * @param                                    $value
-	 * @param array                              $context
-	 * @param null                               $siblingsValues
-	 * @param \Feed\Result\XmlNode|null $nodeResult
-	 * @param array|null                         $settings
-	 *
-	 * @return bool
-	 * @throws \Bitrix\Main\ObjectNotFoundException
-	 */
+    /**
+     * @param $value
+     * @param array $context
+     * @param null $siblingsValues
+     * @param Feed\Result\XmlNode|null $nodeResult
+     * @param null $settings
+     * @return bool
+     * @throws Main\ObjectNotFoundException
+     */
 	public function validate($value, array $context, $siblingsValues = null, Feed\Result\XmlNode $nodeResult = null, $settings = null)
 	{
 		if ($value === null || $value === '')

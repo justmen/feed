@@ -265,7 +265,6 @@ class Base extends Xml\Reference\Node
 	}
 
 	/**
-	 * �������� �������������� �������� ��� ����
 	 *
 	 * @return array|null
 	 */
@@ -279,15 +278,13 @@ class Base extends Xml\Reference\Node
 		return new \SimpleXMLElement('<?xml version="1.0" encoding="' . LANG_CHARSET . '"?><root />', LIBXML_COMPACT);
 	}
 
-	/**
-	 * �������� ���� ������ � ���������
-	 *
-	 * @param $tagValuesList
-	 * @param $context
-	 * @param $parent
-	 *
-	 * @return Feed\Result\XmlNode
-	 */
+    /**
+     * @param $tagValuesList
+     * @param $context
+     * @param \SimpleXMLElement|null $parent
+     * @return Feed\Result\XmlNode
+     * @throws Main\ObjectNotFoundException
+     */
 	public function exportTag($tagValuesList, $context, \SimpleXMLElement $parent = null)
 	{
 		if ($parent === null) { $parent = $this->exportDocument(); }
@@ -297,16 +294,14 @@ class Base extends Xml\Reference\Node
 		return $this->exportTagValue($tagValue, $tagValuesList, $context, $parent);
 	}
 
-	/**
-	 * ��������� �������� ���� (��������� �������� �������� ����� � ����������)
-	 *
-	 * @param                   $tagValue
-	 * @param                   $tagValuesList
-	 * @param                   $context
-	 * @param \SimpleXMLElement $parent
-	 *
-	 * @return \Feed\Result\XmlNode
-	 */
+    /**
+     * @param $tagValue
+     * @param $tagValuesList
+     * @param $context
+     * @param \SimpleXMLElement $parent
+     * @return Feed\Result\XmlNode
+     * @throws Main\ObjectNotFoundException
+     */
 	protected function exportTagValue($tagValue, $tagValuesList, $context, \SimpleXMLElement $parent)
 	{
 		$result = new Feed\Result\XmlNode();
@@ -359,17 +354,16 @@ class Base extends Xml\Reference\Node
 		return $result;
 	}
 
-	/**
-	 * ��������� ��������� ����
-	 *
-	 * @param                               $values
-	 * @param array                         $context
-	 * @param \SimpleXMLElement             $parent
-	 * @param Feed\Result\XmlNode         $tagResult
-	 * @param array|null                    $settings
-	 *
-	 * @return bool
-	 */
+    /**
+     * @param $values
+     * @param array $context
+     * @param \SimpleXMLElement $parent
+     * @param Feed\Result\XmlNode $tagResult
+     * @param null $settings
+     * @return bool
+     * @throws Main\ObjectNotFoundException
+     *
+     */
 	protected function exportTagAttributes($values, array $context, \SimpleXMLElement $parent, Feed\Result\XmlNode $tagResult, $settings = null)
 	{
 		$result = false;
@@ -491,11 +485,7 @@ class Base extends Xml\Reference\Node
 
 			$result = $parent->addChild($tagName, $valueExport);
 		}
-/*        if(count($this->parameters['xpath_namespace']) > 0) {
-            foreach ($this->parameters['xpath_namespace'] as $pathPrefix=>$xpathNamespace) {
-                $result->registerXPathNamespace($pathPrefix, $xpathNamespace);
-            }
-        }*/
+
         return $result;
 	}
 
@@ -586,15 +576,12 @@ class Base extends Xml\Reference\Node
 		}
 	}
 
-	/**
-	 * �������� �������� ���� (��������������� �����)
-	 *
-	 * @param      $tagValuesList
-	 * @param      $tagName
-	 * @param bool $isMultiple
-	 *
-	 * @return mixed
-	 */
+    /***
+     * @param $tagValuesList
+     * @param $tagId
+     * @param bool $isMultiple
+     * @return array|mixed|null
+     */
 	protected function getTagValues($tagValuesList, $tagId, $isMultiple = false)
 	{
 		$result = null;

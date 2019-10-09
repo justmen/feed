@@ -25,14 +25,14 @@ abstract class Model
 		return '\\' . get_called_class();
 	}
 
-	/**
-	 * ��������� ������ �������� �� ���������� ������� d7
-	 *
-	 * @param array $parameters
-	 *
-	 * @return Model[]
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     *
+     * @param array $parameters
+     *
+     * @return Model[]
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws Main\SystemException
+     */
 	public static function loadList($parameters = array())
 	{
 		$result = [];
@@ -80,14 +80,16 @@ abstract class Model
 		return $result;
 	}
 
-	/**
-	 * ��������� ������ �� ��
-	 *
-	 * @param $id int
-	 *
-	 * @return Model
-	 * @throws Main\ObjectNotFoundException
-	 */
+    /**
+     *
+     * @param $id int
+     *
+     * @return Model
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectNotFoundException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
 	public static function loadById($id)
 	{
 		$result = null;
@@ -119,9 +121,10 @@ abstract class Model
 		return null;
 	}
 
-	/**
-	 * @return Table
-	 */
+    /**
+     * @return Table
+     * @throws Main\SystemException
+     */
 	public static function getDataClass()
 	{
 		throw new Main\SystemException('not implemented');

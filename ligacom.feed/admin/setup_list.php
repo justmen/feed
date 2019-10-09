@@ -22,7 +22,6 @@ else if (!Main\Loader::includeModule('ligacom.feed'))
 }
 else
 {
-	Feed\Metrika::load();
 
 	$APPLICATION->IncludeComponent(
 		'ligacom.feed:admin.grid.list',
