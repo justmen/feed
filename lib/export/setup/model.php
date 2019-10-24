@@ -50,7 +50,6 @@ class Model extends Feed\Reference\Storage\Model
 
         $this->handleChanges($isAutoUpdate);
         $this->handleRefresh($hasFullRefresh);
-        $this->updatePromoListener();
 	}
 
 	public function handleChanges($direction)
@@ -73,14 +72,6 @@ class Model extends Feed\Reference\Storage\Model
 		}
 	}
 
-	public function updatePromoListener()
-    {
-        /** @var Feed\Export\Promo\Model $promo */
-        foreach ($this->getPromoCollection() as $promo)
-        {
-            $promo->updateListener();
-        }
-    }
 
 	public function getTrackSourceList()
     {

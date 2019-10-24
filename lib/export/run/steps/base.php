@@ -162,25 +162,34 @@ abstract class Base
 	 */
 	abstract public function run($action, $offset = null);
 
-	/**
-	 * ���������� ������ ����
-	 *
-	 * @param $tagValuesList Ligacom\Feed\Result\XmlValue[]
-	 * @param $elementList array
-	 * @param $context array
-	 * @param $data array|null
-	 * @param $limit int|null
-	 *
-	 * @return array
-	 */
-	protected function writeData($tagValuesList, $elementList, array $context = [], array $data = null, $limit = null)
+    /**
+     * @param array $tagValuesList
+     * @param array $elementList
+     * @param array $context
+     * @param array|null $data
+     * @param null $limit
+     * @return array
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectException
+     * @throws Main\ObjectNotFoundException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
+	protected function writeData(
+	    array $tagValuesList,
+        array $elementList,
+        array $context = [],
+        array $data = null,
+        $limit = null)
 	{
 
 		//todo сейчас этот функционал не используется - можно использовать для дополнительной обработки полей шага
        	$this->extendData($tagValuesList, $elementList, $context, $data);
 
+        //todo описать как происходить формирование xmlElement у каждого элемента в $tagResultList
 	    $tagResultList = $this->buildTagList($tagValuesList, $context);
 
+	    //отправка письма (скорее всего удалить)
 		$this->writeDataUserEvent($tagResultList, $elementList, $context, $data);
 
 		$storageResultList = $this->writeDataStorage($tagResultList, $tagValuesList, $elementList, $context, $data, $limit);
@@ -196,27 +205,23 @@ abstract class Base
 		return $storageResultList;
 	}
 
-	/**
-	 * ��������� ������ ���� ����� $tagValuesList
-	 *
-	 * @param Ligacom\Feed\Result\XmlValue[] $tagValuesList
-	 * @param array                    $elementList
-	 * @param array                    $context
-	 * @param array|null               $data
-	 */
+    /**
+     * @param $tagValuesList
+     * @param $elementList
+     * @param array $context
+     * @param array|null $data
+     */
 	protected function extendData($tagValuesList, $elementList, array $context = [], array $data = null)
 	{
 		$this->extendDataUserEvent($tagValuesList, $elementList, $context, $data);
 	}
 
-	/**
-	 * ���������������� ������� ��� ���������� ����� $tagValuesList
-	 *
-	 * @param Ligacom\Feed\Result\XmlValue[] $tagValuesList
-	 * @param array                    $elementList
-	 * @param array                    $context
-	 * @param array|null               $data
-	 */
+    /**
+     * @param $tagValuesList
+     * @param $elementList
+     * @param array $context
+     * @param array|null $data
+     */
 	protected function extendDataUserEvent($tagValuesList, $elementList, array $context = [], array $data = null)
 	{
 		$stepName = $this->getName();
@@ -238,12 +243,12 @@ abstract class Base
 	}
 
     /**
-     * @param $tagValuesList
+     * @param Feed\Result\XmlValue[] $tagValuesList
      * @param array $context
-     * @return array
+     * @return Feed\Result\XmlNode[]
      * @throws Main\ObjectNotFoundException
      */
-	protected function buildTagList($tagValuesList, array $context = [])
+	protected function buildTagList(array $tagValuesList, array $context = []) :array
 	{
 		$document = null;
 		$isTypedTag = $this->isTypedTag();
@@ -438,32 +443,36 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ������ �� ���������� ��� ��������� �����������
-	 *
-	 * @param $changes
-	 * @param $context
-	 *
-	 * @return array|null
-	 */
+    /**
+     * @param $changes
+     * @param $context
+     * @return array
+     */
 	protected function getStorageChangesFilter($changes, $context)
 	{
 		return []; // invalidate all by default
 	}
 
-	/**
-	 * ���������� ��������� �������� � ���������� ���������
-	 *
-	 * @param $tagResultList Feed\Result\XmlNode[]
-	 * @param $tagValuesList Ligacom\Feed\Result\XmlValue[]
-	 * @param $elementList
-	 * @param $context
-	 * @param $data
-	 * @param $limit
-	 *
-	 * @return array
-	 */
-	protected function writeDataStorage($tagResultList, $tagValuesList, $elementList, array $context = [], array $data = null, $limit = null)
+    /**
+     * @param Feed\Result\XmlNode[] $tagResultList
+     * @param $tagValuesList
+     * @param $elementList
+     * @param array $context
+     * @param array|null $data
+     * @param null $limit
+     * @return array
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
+	protected function writeDataStorage(
+	    array $tagResultList,
+        $tagValuesList,
+        $elementList,
+        array $context = [],
+        array $data = null,
+        $limit = null)
 	{
 		$result = [];
 		$dataClass = $this->getStorageDataClass();
@@ -1013,12 +1022,10 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ���������� ��������� � ��������� ���� ��������
-	 *
-	 * @param $tagResultList Feed\Result\XmlNode[]
-	 * @param $context array
-	 */
+    /**
+     * @param $tagResultList
+     * @param $context
+     */
 	protected function writeDataCopyPublic($tagResultList, $context)
 	{
 		if (
@@ -1077,33 +1084,26 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * �������� �� ������� ������������ ���
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	protected function isAllowDeleteParent()
 	{
 		return false;
 	}
 
-	/**
-	 * ��������� �� ������� �������� �� ���������� ����� (������������ ��� �������� ���������)
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	protected function isAllowPublicDelete()
 	{
 		return false;
 	}
 
-	/**
-	 * ������� ���
-	 *
-	 * @param $context
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @param $context
+     * @throws \Exception
+     */
 	protected function clearDataLog($context)
 	{
 		$entityType = $this->getDataLogEntityType();
@@ -1119,12 +1119,10 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ���������� ������ � warning � ������� �����
-	 *
-	 * @param $tagResultList Feed\Result\XmlNode[]
-	 * @param $context array
-	 */
+    /**
+     * @param $tagResultList
+     * @param $context
+     */
 	protected function writeDataLog($tagResultList, $context)
 	{
 		$entityType = $this->getDataLogEntityType();
@@ -1178,21 +1176,17 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ��� �������� ��� �����
-	 *
-	 * @return string|null
-	 */
+    /**
+     * @return null
+     */
 	protected function getDataLogEntityType()
 	{
 		return null;
 	}
 
-	/**
-	 * ����� ������� ����� � �������� ����������� ��������
-	 *
-	 * @return array
-	 */
+    /**
+     * @return array
+     */
 	protected function getDataLogEntityReference()
 	{
 		return [
@@ -1201,11 +1195,9 @@ abstract class Base
 		];
 	}
 
-	/**
-	 * ������� ���������������� ��������, ������� �� ������ � �������� �� ����������
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @throws Main\ArgumentException
+     */
 	public function removeInvalid()
 	{
 		$context = $this->getContext();
@@ -1218,11 +1210,9 @@ abstract class Base
 		$this->removeByFilter($filter, $context);
 	}
 
-	/**
-	 * ������� �������������� ��������
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @throws Main\ArgumentException
+     */
 	public function removeOld()
 	{
 		$context = $this->getContext();
@@ -1235,14 +1225,14 @@ abstract class Base
 		$this->removeByFilter($filter, $context);
 	}
 
-	/**
-	 * ������� �������� �� �������
-	 *
-	 * @param $filter
-	 * @param $context
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @param $filter
+     * @param $context
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
 	protected function removeByFilter($filter, $context)
 	{
 		$dataClass = $this->getStorageDataClass();
@@ -1345,63 +1335,50 @@ abstract class Base
 		}
 	}
 
-	/**
-	 * ���������� ��������
-	 *
-	 * @return Feed\Export\Run\Processor
-	 */
+    /**
+     * @return Feed\Export\Run\Processor
+     */
 	protected function getProcessor()
 	{
 		return $this->processor;
 	}
 
-	/**
-	 * ������ ��������� ��������
-	 *
-	 * @return Feed\Export\Setup\Model
-	 */
+    /**
+     * @return Feed\Export\Setup\Model
+     */
 	protected function getSetup()
 	{
 		return $this->getProcessor()->getSetup();
 	}
 
-	/**
-	 * �������� ����� ��������
-	 *
-	 * @return Feed\Export\Run\Writer\Base
-	 */
+    /**
+     * @return Feed\Export\Run\Writer\Base
+     */
 	protected function getWriter()
 	{
 		return $this->getProcessor()->getWriter();
 	}
 
-	/**
-	 * �������� � ��������� ����
-	 *
-	 * @return Feed\Export\Run\Writer\Base|null
-	 */
+    /**
+     * @return Feed\Export\Run\Writer\Base|null
+     */
 	protected function getPublicWriter()
 	{
 		return $this->getProcessor()->getPublicWriter();
 	}
 
-	/**
-	 * �������� ����������
-	 *
-	 * @param $name
-	 *
-	 * @return mixed|null
-	 */
+    /**
+     * @param $name
+     * @return mixed|null
+     */
 	protected function getParameter($name)
 	{
 		return $this->getProcessor()->getParameter($name);
 	}
 
-	/**
-	 * �������� ����������
-	 *
-	 * @return array
-	 */
+    /**
+     * @return array
+     */
 	protected function getContext()
 	{
 		return $this->getSetup()->getContext();
@@ -1412,24 +1389,19 @@ abstract class Base
 		return $this->getSetup()->getFormat();
 	}
 
-	/**
-	 * ������� ������ ���� �� ���� ������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isTypedTag()
 	{
 		return false;
 	}
 
-	/**
-	 * ����������� ���
-	 *
-	 * @param $type string|null
-	 *
-	 * @return Feed\Export\Xml\Tag\Base
-	 */
-	public function getTag($type = null)
+    /**
+     * @param null $type
+     * @return Feed\Export\Xml\Tag\Base|null
+     */
+	public function getTag($type = null) :?Feed\Export\Xml\Tag\Base
 	{
 		$result = null;
 
@@ -1465,11 +1437,9 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * �������� ������������� ����
-	 *
-	 * @return null|string
-	 */
+    /**
+     * @return string|null
+     */
 	public function getTagParentName()
 	{
 		if (!isset($this->tagParentName))
@@ -1482,13 +1452,10 @@ abstract class Base
 		return $this->tagParentName;
 	}
 
-	/**
-	 * ���� � ������������� ����
-	 *
-	 * @return array
-	 *
-	 * @throws Main\SystemException
-	 */
+    /**
+     * @return array|null
+     * @throws Main\SystemException
+     */
 	public function getTagPath()
 	{
 		if ($this->tagPath === null)
@@ -1509,14 +1476,11 @@ abstract class Base
 		return $this->tagPath;
 	}
 
-	/**
-	 * ����� ���� � ����
-	 *
-	 * @param Feed\Export\Xml\Tag\Base $tag
-	 * @param $findName
-	 *
-	 * @return array|null
-	 */
+    /**
+     * @param Feed\Export\Xml\Tag\Base $tag
+     * @param $findName
+     * @return null
+     */
 	protected function findTagPath(Feed\Export\Xml\Tag\Base $tag, $findName)
 	{
 		$result = null;
@@ -1566,36 +1530,31 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * ����������� ��� �� ������� ���������
-	 *
-	 * @param Feed\Export\Xml\Format\Reference\Base $format
-	 * @param $type string|null
-	 *
-	 * @return Feed\Export\Xml\Tag\Base|null
-	 */
+    /**
+     * @param Feed\Export\Xml\Format\Reference\Base $format
+     * @param null $type
+     * @return null
+     */
 	public function getFormatTag(Feed\Export\Xml\Format\Reference\Base $format, $type = null)
 	{
 		return null;
 	}
 
-	/**
-	 * �������� ������������� ���� �� ������� ���������
-	 *
-	 * @return string|null
-	 * */
+    /**
+     * @param Feed\Export\Xml\Format\Reference\Base $format
+     * @return null
+     */
 	public function getFormatTagParentName(Feed\Export\Xml\Format\Reference\Base $format)
 	{
 		return null;
 	}
 
-	/**
-	 * @param $tagDescriptionList
-	 * @param $sourceValuesList
-	 * @param $context
-	 *
-	 * @return Ligacom\Feed\Result\XmlValue[]
-	 */
+    /**
+     * @param $tagDescriptionList
+     * @param $sourceValuesList
+     * @param $context
+     * @return array
+     */
 	protected function buildTagValuesList($tagDescriptionList, $sourceValuesList, $context)
 	{
 		$result = [];

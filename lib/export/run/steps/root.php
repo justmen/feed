@@ -26,7 +26,7 @@ class Root extends Base
 		}
 	}
 
-	public function run($action, $offset = null)
+	public function run($action, $offset = null) :Feed\Result\Step
 	{
 		$result = new Feed\Result\Step();
 
@@ -68,7 +68,12 @@ class Root extends Base
 		$writer->updateAttribute($tagName, 0, [ 'date' => $dateType->format($date) ], '');
 	}
 
-	protected function writeDataFile($tagResultList, $storageResultList, $context)
+    /**
+     * @param Feed\Result\XmlNode[] $tagResultList
+     * @param array $storageResultList
+     * @param array $context
+     */
+	protected function writeDataFile(array $tagResultList, array $storageResultList, array $context) :void
 	{
 		$tagResult = reset($tagResultList);
 

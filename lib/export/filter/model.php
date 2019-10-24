@@ -118,14 +118,6 @@ class Model extends Feed\Reference\Storage\Model
 			'FILTER_ID' => $this->getId()
 		];
 
-		// delivery options
-
-		$deliveryOptions = $this->getDeliveryOptions();
-
-		if (!empty($deliveryOptions))
-		{
-			$result['DELIVERY_OPTIONS'] = $deliveryOptions;
-		}
 
 		if (!$isOnlySelf)
 		{
@@ -150,14 +142,6 @@ class Model extends Feed\Reference\Storage\Model
 		return $result;
 	}
 
-	public function getDeliveryOptions()
-	{
-		$deliveryCollection = $this->getDeliveryCollection();
-
-		return $deliveryCollection->getDeliveryOptions();
-	}
-
-
     /**
      * @return Feed\Reference\Storage\Collection
      * @throws \Bitrix\Main\SystemException
@@ -165,14 +149,6 @@ class Model extends Feed\Reference\Storage\Model
 	public function getConditionCollection()
 	{
 		return $this->getChildCollection('FILTER_CONDITION');
-	}
-
-	/**
-	 * @return Feed\Export\Param\Collection
-	 */
-	public function getDeliveryCollection()
-	{
-		return $this->getChildCollection('DELIVERY');
 	}
 
 	protected function getChildCollectionReference($fieldKey)
@@ -183,10 +159,6 @@ class Model extends Feed\Reference\Storage\Model
 		{
 			case 'FILTER_CONDITION':
 				$result = Feed\Export\FilterCondition\Collection::getClassName();
-			break;
-
-			case 'DELIVERY':
-				$result = Feed\Export\Delivery\Collection::getClassName();
 			break;
 		}
 

@@ -165,32 +165,27 @@ class Base extends Xml\Reference\Node
 		}
 	}
 
-	/**
-	 * ����� ����������� ��������
-	 *
-	 * @return bool
-	 */
+    /**
+     *
+     * @return bool
+     */
 	public function hasEmptyValue()
 	{
 		return $this->hasEmptyValue;
 	}
 
-	/**
-	 * ������������� ���������� ����� ��� �������������� ����
-	 *
-	 * @return int|null
-	 */
+    /**
+     * @return int|null
+     */
 	public function getMaxCount()
 	{
 		return $this->maxCount;
 	}
 
-	/**
-	 * ��������� �������� ���������� ��� ���� � ���������� �����
-	 *
-	 * @param       $tagDescriptionList
-	 * @param array $context
-	 */
+    /**
+     * @param $tagDescriptionList
+     * @param array $context
+     */
 	public function extendTagDescriptionList(&$tagDescriptionList, array $context)
 	{
 		$tagId = $this->id;
@@ -229,14 +224,11 @@ class Base extends Xml\Reference\Node
 		}
 	}
 
-	/**
-	 * ��������� �������� ���������� ��� ���� � ����������
-	 *
-	 * @param       $tagDescription
-	 * @param array $context
-	 *
-	 * @return mixed
-	 */
+    /**
+     * @param $tagDescription
+     * @param array $context
+     * @return mixed
+     */
 	public function extendTagDescription($tagDescription, array $context)
 	{
 		$result = $tagDescription;
@@ -279,15 +271,17 @@ class Base extends Xml\Reference\Node
 	}
 
     /**
-     * @param $tagValuesList
-     * @param $context
+     * @param $tagValuesList - массив с массивами описаний тагов
+     * @param array $context - настройки профиля выгрузки
      * @param \SimpleXMLElement|null $parent
      * @return Feed\Result\XmlNode
      * @throws Main\ObjectNotFoundException
      */
-	public function exportTag($tagValuesList, $context, \SimpleXMLElement $parent = null)
+	public function exportTag(array $tagValuesList, array $context, \SimpleXMLElement $parent = null) :Feed\Result\XmlNode
 	{
+	    //если еще не создан рутовый таг, то создаем
 		if ($parent === null) { $parent = $this->exportDocument(); }
+
 
 		$tagValue = $this->getTagValues($tagValuesList, $this->id, false);
 
@@ -390,17 +384,15 @@ class Base extends Xml\Reference\Node
 		return $result;
 	}
 
-	/**
-	 * ��������� �������� ����
-	 *
-	 * @param                           $tagValuesList
-	 * @param                           $context
-	 * @param \SimpleXMLElement         $parent
-	 * @param Feed\Result\XmlNode     $tagResult
-	 *
-	 * @return bool
-	 */
-	protected function exportTagChildren($tagValuesList, $context, \SimpleXMLElement $parent, Feed\Result\XmlNode $tagResult)
+    /**
+     * @param $tagValuesList
+     * @param $context
+     * @param \SimpleXMLElement $parent
+     * @param Feed\Result\XmlNode $tagResult
+     * @return bool
+     * @throws Main\ObjectNotFoundException
+     */
+	protected function exportTagChildren($tagValuesList, $context, \SimpleXMLElement $parent, Feed\Result\XmlNode $tagResult) :bool
 	{
 		$result = false;
 
@@ -457,17 +449,14 @@ class Base extends Xml\Reference\Node
 		return $result;
 	}
 
-	/**
-	 * ��������� �������� ��� ��� xml-��������
-	 *
-	 * @param                                   $value
-	 * @param array                             $context
-	 * @param \SimpleXMLElement                 $parent
-	 * @param Feed\Result\XmlNode|null        $nodeResult
-	 * @param array|null                        $settings
-	 *
-	 * @return \SimpleXMLElement
-	 */
+    /**
+     * @param $value
+     * @param array $context
+     * @param \SimpleXMLElement $parent
+     * @param Feed\Result\XmlNode|null $nodeResult
+     * @param null $settings
+     * @return \SimpleXMLElement|null
+     */
 	public function exportNode($value, array $context, \SimpleXMLElement $parent, Feed\Result\XmlNode $nodeResult = null, $settings = null)
 	{
 		$tagName = $this->name;
@@ -489,24 +478,20 @@ class Base extends Xml\Reference\Node
         return $result;
 	}
 
-	/**
-	 * ������� �������� ��� xml-��������
-	 *
-	 * @param \SimpleXMLElement      $parent
-	 * @param \SimpleXMLElement|null $node
-	 */
+    /**
+     * @param \SimpleXMLElement $parent
+     * @param \SimpleXMLElement|null $node
+     */
 	public function detachNode(\SimpleXMLElement $parent, \SimpleXMLElement $node = null)
 	{
 		if ($node !== null) { unset($node[0]); }
 	}
 
-	/**
-	 * �������� ���������
-	 *
-	 * @param \Feed\Result\XmlNode[]   $fromList
-	 * @param \Feed\Result\XmlNode     $to
-	 * @param bool                              $isError
-	 */
+    /**
+     * @param array $fromList
+     * @param Feed\Result\XmlNode $to
+     * @param $isError
+     */
 	protected function copyResultList(array $fromList, Feed\Result\XmlNode $to, $isError)
 	{
 		$foundErrorMessages = [];
@@ -577,6 +562,7 @@ class Base extends Xml\Reference\Node
 	}
 
     /***
+     * возвращает значения тега, если оно есть
      * @param $tagValuesList
      * @param $tagId
      * @param bool $isMultiple
@@ -607,4 +593,8 @@ class Base extends Xml\Reference\Node
 
 		return $result;
 	}
+
+	public function IsCompositeTag() :bool {
+
+    }
 }

@@ -8,46 +8,36 @@ class XmlValue extends Base
 	protected $tagData = [];
 	protected $multipleTags = [];
 
-	/**
-	 * ���������� ��� ����
-	 *
-	 * @param $type
-	 */
+    /**
+     * @param $type
+     */
 	public function setType($type)
 	{
 		$this->type = $type;
 	}
 
-	/**
-	 * �������� ��� ����
-	 *
-	 * @return string|null
-	 */
+    /**
+     * @return |null
+     */
 	public function getType()
 	{
 		return $this->type;
 	}
 
-	/**
-	 * ������ ����
-	 *
-	 * @internal
-	 * @return array
-	 */
+    /**
+     * @return array
+     */
 	public function getTagData()
 	{
 		return $this->tagData;
 	}
 
-	/**
-	 * �������� �� ��� � ����������� ����������
-	 *
-	 * @param       $tagName
-	 * @param       $value
-	 * @param array $attributeList
-	 *
-	 * @return bool
-	 */
+    /**
+     * @param $tagName
+     * @param $value
+     * @param array $attributeList
+     * @return bool
+     */
 	public function hasTag($tagName, $value, array $attributeList = [])
 	{
 		$result = false;
@@ -80,14 +70,12 @@ class XmlValue extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� ���.
-	 *
-	 * @param       $tagName
-	 * @param mixed $value
-	 * @param array $attributeList ������������� ������, ��� ���� ������� - �������� ��������, �������� ������� - �������� ��������.
-	 * @param array|null $tagSettings �������������� ��������� ��� ��������� ����
-	 */
+    /**
+     * @param $tagName
+     * @param $value
+     * @param array $attributeList
+     * @param null $tagSettings
+     */
 	public function addTag($tagName, $value, array $attributeList = [], $tagSettings = null)
 	{
 		$tag = [
@@ -112,13 +100,11 @@ class XmlValue extends Base
 		}
 	}
 
-	/**
-	 * ������� ���
-	 *
-	 * @param       $tagName
-	 * @param mixed $value ������ �� �������� ����
-	 * @param array $attributeList ������ �� ��������� ����
-	 */
+    /**
+     * @param $tagName
+     * @param null $value
+     * @param array $attributeList
+     */
 	public function removeTag($tagName, $value = null, array $attributeList = [])
 	{
 		if (!isset($this->tagData[$tagName]))
@@ -193,14 +179,11 @@ class XmlValue extends Base
 		}
 	}
 
-	/**
-	 * �������� �������� ����
-	 *
-	 * @param string    $tagName        ��� ����
-	 * @param bool      $isMultiple     �������� �� �������� �������� �������������
-	 *
-	 * @return mixed
-	 */
+    /**
+     * @param $tagName
+     * @param bool $isMultiple
+     * @return array|null
+     */
 	public function getTagValue($tagName, $isMultiple = false)
 	{
 		$result = $isMultiple ? [] : null;
@@ -230,15 +213,12 @@ class XmlValue extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� �������� ��������
-	 *
-	 * @param string    $tagName        ��� ����
-	 * @param string    $attributeName  ��� ��������
-	 * @param bool      $isMultiple     �������� �� �������� �������� �������������
-	 *
-	 * @return mixed
-	 */
+    /**
+     * @param $tagName
+     * @param $attributeName
+     * @param bool $isMultiple
+     * @return array|null
+     */
 	public function getTagAttribute($tagName, $attributeName, $isMultiple = false)
 	{
 		$result = $isMultiple ? [] : null;
@@ -274,13 +254,11 @@ class XmlValue extends Base
 		return $result;
 	}
 
-	/**
-	 * ���������� �������� ����
-	 *
-	 * @param string    $tagName    ��� ����
-	 * @param mixed     $value      �������� ����
-	 * @param bool      $isMultiple �������� �� �������� ���� �������������
-	 */
+    /**
+     * @param $tagName
+     * @param $value
+     * @param bool $isMultiple
+     */
 	public function setTagValue($tagName, $value, $isMultiple = false)
 	{
 		if (!isset($this->tagData[$tagName]))
@@ -327,14 +305,12 @@ class XmlValue extends Base
 		}
 	}
 
-	/**
-	 * ���������� ������� ����
-	 *
-	 * @param string    $tagName        ��� ����
-	 * @param string    $attributeName  ��� ��������
-	 * @param mixed     $value          �������� ��������
-	 * @param bool      $isMultiple     �������� �� �������� �������� �������������
-	 */
+    /**
+     * @param $tagName
+     * @param $attributeName
+     * @param $value
+     * @param bool $isMultiple
+     */
 	public function setTagAttribute($tagName, $attributeName, $value, $isMultiple = false)
 	{
 		if (!isset($this->tagData[$tagName]))

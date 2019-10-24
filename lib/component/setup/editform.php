@@ -77,7 +77,6 @@ class EditForm extends Feed\Component\Model\EditForm
 		$result = parent::validate($data, $fields);
 
 		$this->validateIblock($result, $data, $fields);
-		$this->validateDelivery($result, $data, $fields);
 		$this->validateFilterCondition($result, $data, $fields);
 
 		return $result;
@@ -95,53 +94,6 @@ class EditForm extends Feed\Component\Model\EditForm
 		}
 	}
 
-	protected function validateDelivery(Main\Entity\Result $result, $data, array $fields = null)
-	{
-		if (isset($fields['DELIVERY'])) // has delivery in validation list
-		{
-			$deliveryTypeList = [
-				Feed\Export\Delivery\Table::DELIVERY_TYPE_DELIVERY
-			];
-
-			foreach ($deliveryTypeList as $deliveryType)
-			{
-				if (empty($data['DELIVERY']) || !$this->isValidDeliveryDataList($data['DELIVERY'], $deliveryType)) // and empty primary delivery
-				{
-					$hasChildDeliveryOptions = false;
-
-					foreach ($data['IBLOCK_LINK'] as $iblockLink)
-					{
-						if (!empty($iblockLink['DELIVERY']) && $this->isValidDeliveryDataList($iblockLink['DELIVERY'], $deliveryType))
-						{
-							$hasChildDeliveryOptions = true;
-							break;
-						}
-						else if (!empty($iblockLink['FILTER']))
-						{
-							foreach ($iblockLink['FILTER'] as $filter)
-							{
-								if (!empty($filter['DELIVERY']) && $this->isValidDeliveryDataList($filter['DELIVERY'], $deliveryType))
-								{
-									$hasChildDeliveryOptions = true;
-									break 2;
-								}
-							}
-						}
-					}
-
-					if ($hasChildDeliveryOptions)
-					{
-						$result->addError(new Feed\Error\EntityError(
-							Feed\Config::getLang('COMPONENT_SETUP_EDIT_FORM_ERROR_CHILD_DELIVERY_OPTIONS_WITHOUT_ROOT'),
-							0,
-							[ 'FIELD' => 'DELIVERY' ]
-						));
-						break;
-					}
-				}
-			}
-		}
-	}
 
 	protected function validateFilterCondition(Main\Entity\Result $result, $data, array $fields = null)
 	{
@@ -342,24 +294,4 @@ class EditForm extends Feed\Component\Model\EditForm
 		return $modelClassName::initialize($data);
 	}
 
-	protected function isValidDeliveryDataList($dataList, $deliveryType)
-	{
-		$result = false;
-
-		if (is_array($dataList))
-		{
-			foreach ($dataList as $data)
-			{
-				$isMatchType = (isset($data['DELIVERY_TYPE']) && $data['DELIVERY_TYPE'] === $deliveryType);
-
-				if ($isMatchType && Feed\Export\Delivery\Table::isValidData($data))
-				{
-					$result = true;
-					break;
-				}
-			}
-		}
-
-		return $result;
-	}
 }

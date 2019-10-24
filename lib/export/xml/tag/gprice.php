@@ -12,7 +12,8 @@ class GPrice extends Base
 		    'id' => 'g:price',
 			'name' => 'xmlns:g:price',
 			'value_type' => Feed\Type\Manager::TYPE_NUMBER,
-			'value_positive' => true
+			'value_positive' => true,
+            'added_value' => Feed\Export\Xml\Tag\CurrencyId::class
 		];
 	}
 

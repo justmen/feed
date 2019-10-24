@@ -215,24 +215,19 @@ class Offer extends Base
 		return $result;
 	}
 
-	/**
-	 * ��������� ��������
-	 *
-	 * @param string $action
-	 * @param string|null $offset
-	 *
-	 * @return Ligacom\Feed\Result\Step
-	 *
-	 * @throws \Bitrix\Main\LoaderException
-	 * @throws \Bitrix\Main\ObjectNotFoundException
-	 * @throws \Bitrix\Main\SystemException
-	 */
-	public function run($action, $offset = null)
+    /**
+     * @param $action
+     * @param null $offset
+     * @return Feed\Result\Step
+     * @throws Main\ObjectNotFoundException
+     */
+	public function run($action, $offset = null) :Feed\Result\Step
 	{
+
 		$result = new Feed\Result\Step();
 
 		$this->setRunAction($action);
-        //todo понять откуда берется конфиг
+
 		$iblockConfigList = $this->getIblockConfigList();
 
 		//мой кусок для разбиения по пробелу одиночных элементов
@@ -255,6 +250,7 @@ class Offer extends Base
                 }
         }
         //end мой кусок
+        /** $formatTag Feed\Export\Xml\Tag\Base*/
 		$formatTag = $this->getTag();
 
 		// calculate offset and total
@@ -630,15 +626,14 @@ class Offer extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� �������� �� ����������
-	 *
-	 * @param bool|null $isNeedAll
-	 *
-	 * @return array
-	 */
+    /**
+     * @param null $isNeedAll
+     * @return array
+     * @throws Main\SystemException
+     */
 	protected function getIblockConfigList($isNeedAll = null)
 	{
+	    /*$var Feed\Export\Setup\Model*/
 		$setup = $this->getSetup();
 		$result = [];
 
@@ -659,24 +654,29 @@ class Offer extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� ��������� �� �������
-	 *
-	 * @param $sourceFilter
-	 * @param $sourceSelect
-	 * @param $querySelect
-	 * @param $tagDescriptionList
-	 * @param $context
-	 * @param array|null $changesFilter
-	 * @param int|null $queryOffset
-	 * @param int|null $limit
-	 * @param int $successCount
-	 *
-	 * @return array 'OFFSET' => ������ ��� ���������� �������, 'SUCCESS_COUNT' => ���������� ������� ����������� �����
-	 *
-	 * @throws Main\ObjectNotFoundException
-	 */
-	protected function exportIblockFilter($sourceFilter, $sourceSelect, $querySelect, $tagDescriptionList, $context, $changesFilter = null, $queryOffset = null, $limit = null, $successCount = 0)
+    /**
+     * @param array $sourceFilter - массив фильтров по источнику данных
+     * @param array $sourceSelect - массив источников данных (сущностей) с выбранными полями
+     * @param array $querySelect - поля выбираемые из элементов каталога и предложений
+     * @param array $tagDescriptionList - массив тагов с описанием
+     * @param array $context - настройки профиля выгрузки
+     * @param null $changesFilter
+     * @param null $queryOffset - отступ в выборке
+     * @param null $limit
+     * @param int $successCount - количество успешно полученных элементов
+     * @return array
+     * @throws Main\ObjectNotFoundException
+     */
+	protected function exportIblockFilter(
+	    array $sourceFilter,
+        array $sourceSelect,
+        array $querySelect,
+        array $tagDescriptionList,
+        array $context,
+        $changesFilter = null,
+        $queryOffset = null,
+        $limit = null,
+        $successCount = 0) :array
 	{
 		$queryFilter = $this->makeQueryFilter($sourceFilter, $sourceSelect, $context, $changesFilter);
 		$hasLimit = ($limit > 0);
@@ -1680,16 +1680,14 @@ class Offer extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� �������� �� ���������� �� ������ ����������� ������� � ���� ������
-	 *
-	 * @param $sourceSelectList
-	 * @param $elementList
-	 * @param $parentList
-	 *
-	 * @return array
-	 * @throws \Bitrix\Main\ObjectNotFoundException
-	 */
+    /**
+     * @param $sourceSelect
+     * @param $elementList
+     * @param $parentList
+     * @param $queryContext
+     * @return array
+     * @throws Main\ObjectNotFoundException
+     */
 	protected function extractElementListValues($sourceSelect, $elementList, $parentList, $queryContext)
 	{
 		$result = [];
@@ -1726,14 +1724,11 @@ class Offer extends Base
 		return $result;
 	}
 
-	/**
-	 * �������� �������� ������ ��� ��������
-	 *
-	 * @param $type
-	 *
-	 * @return Feed\Export\Entity\Reference\Source
-	 * @throws \Bitrix\Main\ObjectNotFoundException
-	 */
+    /**
+     * @param $type
+     * @return Feed\Export\Entity\Reference\Source
+     * @throws Main\ObjectNotFoundException
+     */
 	protected function getSource($type)
 	{
 		return Feed\Export\Entity\Manager::getSource($type);

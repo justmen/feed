@@ -206,16 +206,6 @@ class Model extends Feed\Reference\Storage\Model
 
 		$result += $this->getIblockContext();
 
-
-		// delivery options
-
-		$deliveryOptions = $this->getDeliveryOptions();
-
-		if (!empty($deliveryOptions))
-		{
-			$result['DELIVERY_OPTIONS'] = $deliveryOptions;
-		}
-
 		$result = $this->mergeParentContext($result);
 
 		return $result;
@@ -251,13 +241,6 @@ class Model extends Feed\Reference\Storage\Model
 		}
 
 		return $this->iblockContext;
-	}
-
-	public function getDeliveryOptions()
-	{
-		$deliveryCollection = $this->getDeliveryCollection();
-
-		return $deliveryCollection->getDeliveryOptions();
 	}
 
 
@@ -339,14 +322,6 @@ class Model extends Feed\Reference\Storage\Model
 		return $this->getChildCollection('PARAM');
 	}
 
-	/**
-	 * @return Feed\Export\Param\Collection
-	 */
-	public function getDeliveryCollection()
-	{
-		return $this->getChildCollection('DELIVERY');
-	}
-
 	protected function getChildCollectionReference($fieldKey)
 	{
 		$result = null;
@@ -359,10 +334,6 @@ class Model extends Feed\Reference\Storage\Model
 
 			case 'PARAM':
 				$result = Feed\Export\Param\Collection::getClassName();
-			break;
-
-			case 'DELIVERY':
-				$result = Feed\Export\Delivery\Collection::getClassName();
 			break;
 		}
 

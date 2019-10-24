@@ -91,31 +91,26 @@ abstract class Node
 		return $this->isVisible;
 	}
 
-	/**
-	 * �������� ������������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isRequired()
 	{
 		return $this->isRequired;
 	}
 
-	/**
-	 * �������� �� ������������ (�� ����� ���� ������� � ����������)
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isDefined()
 	{
 		return ($this->getParameter('defined_value') !== null);
 	}
 
-	/**
-	 * �������� ������ ��� ������������ �����
-	 *
-	 * @return array|null
-	 */
+    /**
+     * @param array $context
+     * @return array|null
+     */
 	public function getDefinedSource(array $context = [])
 	{
 		$result = null;
@@ -132,78 +127,61 @@ abstract class Node
 		return $result;
 	}
 
-	/**
-	 * �������� ������ �� ���������
-	 *
-	 * @param $context array
-	 *
-	 * @return string
-	 */
+    /**
+     * @param array $context
+     * @return string
+     */
 	public function getDefaultSource(array $context = [])
 	{
 		return Feed\Export\Entity\Manager::TYPE_TEXT;
 	}
 
-	/**
-	 * ������ ������������ ��� ��������� ������
-	 *
-	 * @param $context array
-	 *
-	 * @return array
-	 */
+    /**
+     * @param array $context
+     * @return array
+     */
 	public function getSourceRecommendation(array $context = [])
 	{
 		return [];
 	}
 
-	/**
-	 * ���������� �������������
-	 *
-	 * @return string
-	 */
+    /**
+     * @return string
+     */
 	public function getId()
 	{
 		return $this->id;
 	}
 
-	/**
-	 * �������� ��� xml
-	 *
-	 * @return string
-	 */
+    /**
+     * @return string
+     */
 	public function getName()
 	{
 		return $this->name;
 	}
 
-	/**
-	 * ��� ��������
-	 *
-	 * @return mixed|null
-	 */
+    /**
+     * @return string
+     */
 	public function getValueType()
 	{
 		return $this->valueType;
 	}
 
-	/**
-	 * �������� �� ���������
-	 *
-	 * @param array $context
-	 * @param array|null $siblingsValues
-	 *
-	 * @return mixed|null
-	 */
+    /**
+     * @param array $context
+     * @param null $siblingsValues
+     * @return mixed|null
+     */
 	public function getDefaultValue(array $context = [], $siblingsValues = null)
 	{
 		return $this->getParameter('default_value');
 	}
 
-	/**
-	 * ������������ ����� ��������
-	 *
-	 * @return int|null
-	 */
+    /**
+     * @return int|null
+     */
 	public function getMaxLength()
 	{
 		return $this->maxLength;
@@ -250,37 +228,31 @@ abstract class Node
 		return $result;
 	}
 
-	/**
-	 * ��������� xml-������� � ��������
-	 *
-	 * @param                                    $value
-	 * @param array                              $context
-	 * @param \SimpleXMLElement                  $parent
-	 * @param Feed\Result\XmlNode|null         $nodeResult
-	 * @param array|null                         $settings
-	 *
-	 * @return \SimpleXMLElement|null
-	 */
+    /**
+     * @param $value
+     * @param array $context
+     * @param \SimpleXMLElement $parent
+     * @param Feed\Result\XmlNode|null $nodeResult
+     * @param null $settings
+     * @return mixed
+     */
 	abstract public function exportNode($value, array $context, \SimpleXMLElement $parent, Feed\Result\XmlNode $nodeResult = null, $settings = null);
 
-	/**
-	 * ������� xml-������� �� ��������
-	 *
-	 * @param \SimpleXMLElement      $parent
-	 * @param \SimpleXMLElement|null $node
-	 */
+    /**
+     * @param \SimpleXMLElement $parent
+     * @param \SimpleXMLElement|null $node
+     * @return mixed
+     */
 	abstract public function detachNode(\SimpleXMLElement $parent, \SimpleXMLElement $node = null);
 
-	/**
-	 * ����������� �������� �� ��������� ���� ��������
-	 *
-	 * @param                                    $value
-	 * @param                                    $context array
-	 * @param Feed\Result\XmlNode|null         $nodeResult
-	 * @param array|null                         $settings
-	 *
-	 * @return string
-	 */
+    /**
+     * @param $value
+     * @param array $context
+     * @param Feed\Result\XmlNode|null $nodeResult
+     * @param null $settings
+     * @return string
+     * @throws Main\ObjectNotFoundException
+     */
 	protected function formatValue($value, array $context = [], Feed\Result\XmlNode $nodeResult = null, $settings = null)
 	{
 		$valueType = $this->getValueType();

@@ -300,29 +300,23 @@ abstract class Source
 		// nothing by default
 	}
 
-	/**
-	 * ������� �������� ����� �� ����������� ������� CIBlockElement::GetList
-	 *
-	 * @param $elementList
-	 * @param $parentList
-	 * @param $selectFields
-	 * @param $queryContext
-	 * @param $sourceValues
-	 *
-	 * @return array
-	 */
+    /**
+     * @param $elementList
+     * @param $parentList
+     * @param $selectFields
+     * @param $queryContext
+     * @param $sourceValues
+     * @return array
+     */
 	public function getElementListValues($elementList, $parentList, $selectFields, $queryContext, $sourceValues)
 	{
 		return [];
 	}
 
-	/**
-	 * ��������������� ����� ��� ��������� �������� ����� ��������
-	 *
-	 * @param $fieldList
-	 *
-	 * @return array
-	 */
+    /**
+     * @param $fieldList
+     * @return array
+     */
 	protected function buildFieldsDescription($fieldList)
 	{
 		$result = [];

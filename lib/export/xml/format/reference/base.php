@@ -24,12 +24,6 @@ abstract class Base
 	 * */
 	abstract public function getRoot();
 
-
-	/**
-	 * @return string
-	 */
-	abstract public function getCurrencyParentName();
-
 	/**
 	 * @return Feed\Export\Xml\Tag\Base
 	 * */

@@ -5,6 +5,7 @@ namespace Ligacom\Feed\Export\Xml\Format\GoogleMerchant;
 use Bitrix\Main;
 use \Ligacom\Feed\Export\PromoGift;
 use \Ligacom\Feed\Export\Xml;
+use Ligacom\Feed\Export\Xml\Format\Reference\Feed;
 use Ligacom\Feed\Type;
 use \Ligacom\Feed\Export\Promo;
 use \Ligacom\Feed\Export\PromoProduct;
@@ -67,27 +68,6 @@ class GoogleMerchant extends Xml\Format\Reference\Base
 		return $result;
 	}
 
-	public function getCurrencyParentName()
-	{
-		return 'currencies';
-	}
-
-	public function getCurrency()
-	{
-		return new Xml\Tag\Base([
-			'name' => 'currency',
-			'empty_value' => true,
-			'attributes' => [
-				new Xml\Attribute\Base(['name' => 'id', 'value_type' => 'currency', 'required' => true]),
-				new Xml\Attribute\Base(['name' => 'rate', 'required' => true]),
-			],
-		]);
-	}
-
-
-
-
-
 	public function getOfferParentName()
 	{
 		return 'channel';
@@ -129,7 +109,14 @@ class GoogleMerchant extends Xml\Format\Reference\Base
                     new Xml\Tag\GProductType(),
                     new Xml\Tag\GAvailability(['visible' => true, 'default_value' => 'in stock']),
                     new Xml\Tag\GBrand(['required'=> true]),
-
+                    new Xml\Tag\Base([
+                        'name' => 'currency',
+                        'empty_value' => true,
+                        'attributes' => [
+                            new Xml\Attribute\Base(['name' => 'id', 'value_type' => 'currency', 'required' => true]),
+                            new Xml\Attribute\Base(['name' => 'rate', 'required' => true]),
+                        ],
+                    ]),
 					new Xml\Tag\GPrice(
 					    [
 					        'required' => true,
@@ -157,7 +144,7 @@ class GoogleMerchant extends Xml\Format\Reference\Base
                     new Xml\Tag\GCondition(),
                     new Xml\Tag\GGtin(),
                     new Xml\Tag\GMpn(),
-                    new Xml\Tag\CurrencyId(),
+                    new Xml\Tag\CurrencyId([ 'required' => true]),
                     new Xml\Tag\GIdentifierExists(),
                     new Xml\Tag\GMobilLink(),
                     new Xml\Tag\GGoogleProductCategory(),
@@ -306,4 +293,14 @@ class GoogleMerchant extends Xml\Format\Reference\Base
 			}
 		}
 	}
+
+
+    /**
+     * @return Feed\Export\Xml\Tag\Base
+     * */
+    public function getCurrency()
+    {
+        // TODO: Implement getCurrency() method.
+    }
+
 }

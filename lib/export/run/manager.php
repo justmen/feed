@@ -12,18 +12,13 @@ class Manager
 	const STEP_ROOT = 'root';
 	const STEP_OFFER = 'offer';
 	const STEP_CURRENCY = 'currency';
-	const STEP_CATEGORY = 'category';
-	const STEP_PROMO_PRODUCT = 'promo_product';
-	const STEP_PROMO_GIFT = 'promo_gift';
-	const STEP_PROMO = 'promo';
-	const STEP_GIFT = 'gift';
+
 
 	const ENTITY_TYPE_ROOT = 'root';
 	const ENTITY_TYPE_OFFER = 'offer';
 	const ENTITY_TYPE_CATEGORY = 'category';
 	const ENTITY_TYPE_CURRENCY = 'currency';
-	const ENTITY_TYPE_PROMO = 'promo';
-	const ENTITY_TYPE_GIFT = 'gift';
+
 
 	protected static $registeredAgentMethods = [];
 	protected static $registeredChanges = [];
