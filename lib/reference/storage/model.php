@@ -33,7 +33,7 @@ abstract class Model
      * @throws \Bitrix\Main\ArgumentException
      * @throws Main\SystemException
      */
-	public static function loadList($parameters = array())
+	public static function loadList($parameters = array()) :array
 	{
 		$result = [];
 		$tableClass = static::getDataClass();
@@ -228,13 +228,12 @@ abstract class Model
 		return $this->collection;
 	}
 
-	/**
-	 * @param $fieldKey
-	 *
-	 * @return Collection
-	 * @throws \Bitrix\Main\SystemException
-	 */
-	protected function getChildCollection($fieldKey)
+    /**
+     * @param $fieldKey
+     * @return Collection
+     * @throws Main\SystemException
+     */
+	protected function getChildCollection($fieldKey) :Feed\Reference\Storage\Collection
 	{
 		if (!isset($this->childCollection[$fieldKey]))
 		{
@@ -244,7 +243,12 @@ abstract class Model
 		return $this->childCollection[$fieldKey];
 	}
 
-	protected function loadChildCollection($fieldKey)
+    /**
+     * @param $fieldKey
+     * @return Feed\Export\Param\Collection
+     * @throws Main\SystemException
+     */
+	protected function loadChildCollection($fieldKey) :Feed\Reference\Storage\Collection
 	{
 		$collectionClassName = static::getChildCollectionReference($fieldKey);
 		$result = null;
@@ -271,7 +275,7 @@ abstract class Model
 		return $result;
 	}
 
-	protected function getChildCollectionQueryParameters($fieldKey)
+	protected function getChildCollectionQueryParameters($fieldKey) :array
 	{
 		$tableClass = static::getDataClass();
 		$reference = $tableClass::getReference($this->getId());

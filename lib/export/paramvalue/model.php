@@ -10,11 +10,9 @@ Loc::loadMessages(__FILE__);
 
 class Model extends Feed\Reference\Storage\Model
 {
-	/**
-	 * �������� ������ �������
-	 *
-	 * @return Table
-	 */
+    /**
+     * @return Feed\Reference\Storage\Table|string
+     */
 	public static function getDataClass()
 	{
 		return Table::getClassName();

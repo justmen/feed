@@ -220,6 +220,7 @@ class Offer extends Base
      * @param null $offset
      * @return Feed\Result\Step
      * @throws Main\ObjectNotFoundException
+     * @throws Main\SystemException
      */
 	public function run($action, $offset = null) :Feed\Result\Step
 	{
@@ -665,7 +666,11 @@ class Offer extends Base
      * @param null $limit
      * @param int $successCount - количество успешно полученных элементов
      * @return array
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectException
      * @throws Main\ObjectNotFoundException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
      */
 	protected function exportIblockFilter(
 	    array $sourceFilter,
@@ -1066,14 +1071,11 @@ class Offer extends Base
 		];
 	}
 
-	/**
-	 * ���������� ��������� �������������� �� ���� ���
-	 *
-	 * @param $limit int|null
-	 * @param $context array
-	 *
-	 * @return int
-	 */
+    /**
+     * @param $context
+     * @param null $limit
+     * @return int
+     */
 	protected function getQueryElementListPageSize($context, $limit = null)
 	{
 		if ($limit > 0)
@@ -1681,6 +1683,8 @@ class Offer extends Base
 	}
 
     /**
+     * Компанует данные элемента по всем источкикам данных
+     * массив элементов с массивами значений по каждому источнику
      * @param $sourceSelect
      * @param $elementList
      * @param $parentList
@@ -1688,7 +1692,7 @@ class Offer extends Base
      * @return array
      * @throws Main\ObjectNotFoundException
      */
-	protected function extractElementListValues($sourceSelect, $elementList, $parentList, $queryContext)
+	protected function extractElementListValues($sourceSelect, $elementList, $parentList, $queryContext) :array
 	{
 		$result = [];
 		$conflictList = $this->getProcessor()->getConflicts();
@@ -1734,15 +1738,12 @@ class Offer extends Base
 		return Feed\Export\Entity\Manager::getSource($type);
 	}
 
-	/**
-	 * ���� CATALOG_TYPE �������� �������� ���������� "����� �� ����� �������� �����������"
-	 *
-	 * @param $context
-	 *
-	 * @return bool
-	 * @throws \Bitrix\Main\ArgumentNullException
-	 * @throws \Bitrix\Main\ArgumentOutOfRangeException
-	 */
+    /**
+     * @param $context
+     * @return bool
+     * @throws Main\ArgumentNullException
+     * @throws Main\ArgumentOutOfRangeException
+     */
 	protected function isCatalogTypeCompatibility($context)
 	{
 		$result = false;

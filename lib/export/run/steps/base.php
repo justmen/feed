@@ -1553,9 +1553,9 @@ abstract class Base
      * @param $tagDescriptionList
      * @param $sourceValuesList
      * @param $context
-     * @return array
+     * @return Feed\Result\XmlValue[]
      */
-	protected function buildTagValuesList($tagDescriptionList, $sourceValuesList, $context)
+	protected function buildTagValuesList(array $tagDescriptionList, array $sourceValuesList, array $context) :array
 	{
 		$result = [];
 
@@ -1567,15 +1567,14 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * @param $elementId
-	 * @param $tagDescriptionList
-	 * @param $sourceValues
-	 * @param $context
-	 *
-	 * @return Ligacom\Feed\Result\XmlValue
-	 */
-	protected function buildTagValues($elementId, $tagDescriptionList, $sourceValues, $context)
+    /**
+     * @param $elementId
+     * @param array $tagDescriptionList
+     * @param array $sourceValues
+     * @param array $context
+     * @return Feed\Result\XmlValue
+     */
+	protected function buildTagValues($elementId, array $tagDescriptionList, array $sourceValues, array $context) :Feed\Result\XmlValue
 	{
 		$result = new Feed\Result\XmlValue();
 
@@ -1681,7 +1680,9 @@ abstract class Base
 		{
 			$result = $sourceValues[$sourceMap['TYPE']][$sourceMap['FIELD']];
 		}
-
+        if(isset($sourceMap['APPEND'])) {
+           $A = 1341;
+        }
 		return $result;
 	}
 

@@ -13,11 +13,9 @@ class Model extends Feed\Reference\Storage\Model
 	/** @var Feed\Export\ParamValue\Collection */
 	protected $valueCollection;
 
-	/**
-	 * �������� ������ �������
-	 *
-	 * @return Table
-	 */
+    /**
+     * @return Feed\Reference\Storage\Table|string
+     */
 	public static function getDataClass()
 	{
 		return Table::getClassName();
@@ -30,10 +28,11 @@ class Model extends Feed\Reference\Storage\Model
 		return is_array($fieldValue) ? $fieldValue : null;
 	}
 
-	/**
-	 * @return Feed\Export\ParamValue\Collection
-	 */
-	public function getValueCollection()
+    /**
+     * @return Feed\Reference\Storage\Collection
+     * @throws Main\SystemException
+     */
+	public function getValueCollection() :Feed\Reference\Storage\Collection
 	{
 		return $this->getChildCollection('PARAM_VALUE');
 	}

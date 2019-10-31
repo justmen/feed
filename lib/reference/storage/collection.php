@@ -17,22 +17,17 @@ abstract class Collection implements \ArrayAccess, \Countable, \IteratorAggregat
 		return '\\' . get_called_class();
 	}
 
-	/**
-	 * ������ �� ����� ������
-	 *
-	 * @return Model
-	 */
+    /**
+     * @return mixed
+     */
 	abstract public static function getItemReference();
 
-	/**
-	 * ��������� ��������� ��� ������������ ��������
-	 *
-	 * @param Feed\Reference\Storage\Model $model
-	 * @param array $filter
-	 *
-	 * @return Feed\Reference\Storage\Collection
-	 * @throws \Bitrix\Main\SystemException
-	 */
+    /**
+     * @param Model $parent
+     * @param $filter
+     * @return Collection
+     * @throws Main\SystemException
+     */
 	public static function load(Model $parent, $filter)
 	{
 		$collection = new static();

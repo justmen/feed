@@ -120,6 +120,7 @@ class GoogleMerchant extends Xml\Format\Reference\Base
 					new Xml\Tag\GPrice(
 					    [
 					        'required' => true,
+                            'append' =>  new Xml\Tag\CurrencyId([ 'required' => true]),
                             'double_field' => [
                                 new Xml\Tag\Base(['name'=> 'currencyTest', 'visible'=> true])
                             ],

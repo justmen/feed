@@ -38,6 +38,10 @@ class GPrice extends Base
 				'TYPE' => Feed\Export\Entity\Manager::TYPE_CATALOG_PRICE,
 				'FIELD' => 'BASE.DISCOUNT_VALUE'
 			];
+            $result['APPEND'] = [
+                'TYPE' => Feed\Export\Entity\Manager::TYPE_CATALOG_PRICE,
+                'FIELD' => 'BASE.CURRENCY'
+            ];
 		}
 
 		return $result;

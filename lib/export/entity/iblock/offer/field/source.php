@@ -24,7 +24,7 @@ class Source extends Feed\Export\Entity\Iblock\Element\Field\Source
 		];
 	}
 
-	public function getElementListValues($elementList, $parentList, $select, $queryContext, $sourceValues)
+	public function getElementListValues(array $elementList, array $parentList, array $select, array $queryContext, array $sourceValues) :array
 	{
 		$result = [];
 

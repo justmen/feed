@@ -40,8 +40,9 @@ class Model extends Feed\Reference\Storage\Model
 		return $this->tagDescriptionList;
 	}
 
-	protected function createTagDescriptionList()
+	protected function createTagDescriptionList() :array
 	{
+	    /* @var Feed\Reference\Storage\Collection $paramCollection*/
 		$paramCollection = $this->getParamCollection();
 		$result = [];
 		$textType = Feed\Export\Entity\Manager::TYPE_TEXT;
@@ -49,6 +50,7 @@ class Model extends Feed\Reference\Storage\Model
 		/** @var Feed\Export\Param\Model $param */
 		foreach ($paramCollection as $param)
 		{
+		    /** @var Feed\Reference\Storage\Collection $paramValueCollection */
 			$paramValueCollection = $param->getValueCollection();
 			$tagResult = [
 				'TAG' => $param->getField('XML_TAG'),
@@ -296,28 +298,28 @@ class Model extends Feed\Reference\Storage\Model
 		return $iblockContext['HAS_OFFER'];
 	}
 
-	/**
-	 * �������� ������ �������
-	 *
-	 * @return Table
-	 */
+    /**
+     * @return Feed\Reference\Storage\Table|string
+     */
 	public static function getDataClass()
 	{
 		return Table::getClassName();
 	}
 
-	/**
-	 * @return Feed\Export\Filter\Collection
-	 */
-	public function getFilterCollection()
+    /**
+     * @return Feed\Reference\Storage\Collection
+     * @throws Main\SystemException
+     */
+	public function getFilterCollection() :Feed\Reference\Storage\Collection
 	{
 		return $this->getChildCollection('FILTER');
 	}
 
-	/**
-	 * @return Feed\Export\Param\Collection
-	 */
-	public function getParamCollection()
+    /**
+     * @return Feed\Reference\Storage\Collection
+     * @throws Main\SystemException
+     */
+	public function getParamCollection() :Feed\Reference\Storage\Collection
 	{
 		return $this->getChildCollection('PARAM');
 	}

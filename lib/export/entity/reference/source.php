@@ -21,22 +21,16 @@ abstract class Source
 		return $this->type;
 	}
 
-	/**
-	 * ���� ��������
-	 *
-	 * @param array $context
-	 *
-	 * @return array
-	 */
+    /**
+     * @param array $context
+     * @return mixed
+     */
 	abstract public function getFields(array $context = []);
 
     /**
-     * ���� ��������
-     *
      * @param $fieldId
      * @param array $context
-     *
-     * @return array|null
+     * @return mixed|null
      */
     public function getField($fieldId, array $context = [])
     {
@@ -58,14 +52,11 @@ abstract class Source
         return $result;
     }
 
-	/**
-	 * �������� �������� ��������
-	 *
-	 * @param       $field
-	 * @param array $context
-	 *
-	 * @return array|null
-	 */
+    /**
+     * @param $field
+     * @param array $context
+     * @return array|null
+     */
 	public function getFieldEnum($field, array $context = [])
 	{
 		$result = null;
@@ -151,13 +142,10 @@ abstract class Source
 	}
 
     /**
-     * ������������ ��� ����
-     *
-     * @param array $field
-     * @param string $query
+     * @param $field
+     * @param $query
      * @param array $context
-     *
-     * @return array|null
+     * @return null
      */
     public function getFieldAutocomplete($field, $query, array $context = [])
     {
@@ -165,24 +153,19 @@ abstract class Source
     }
 
     /**
-     * ������ �������� ��� ����������� ������������
-     *
-     * @param array $field
-     * @param array $valueList
+     * @param $field
+     * @param $valueList
      * @param array $context
-     *
-     * @return array|null
+     * @return null
      */
     public function getFieldDisplayValue($field, $valueList, array $context = [])
     {
         return null;
     }
 
-	/**
-	 * �������� ��������
-	 *
-	 * @return string
-	 */
+    /**
+     * @return null
+     */
 	public function getTitle()
 	{
 		$langPrefix = $this->getLangPrefix();
@@ -190,66 +173,52 @@ abstract class Source
 		return Feed\Config::getLang($langPrefix . 'TITLE');
 	}
 
-	/**
-	 * ���� ������������: �� ����� ������������ �����, ����� ��������� ����� ��������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isVariable()
 	{
 		return false;
 	}
 
-	/**
-	 * �������� �� ��������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isTemplate()
 	{
 		return false;
 	}
 
-	/**
-	 * ����� ����������� � �������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isSelectable()
 	{
 		return true;
 	}
 
-	/**
-	 * ���� select ��� ������� CIBlockElement::GetList
-	 *
-	 * @param $select
-	 *
-	 * @return array
-	 */
+    /**
+     * @param $select
+     * @return array
+     */
 	public function getQuerySelect($select)
 	{
 		return [];
 	}
 
-	/**
-	 * ����� �� ������������ ������ ��� CIBlockElement::GetList
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     */
 	public function isFilterable()
 	{
 		return false;
 	}
 
-	/**
-	 * ������ ��� ������� CIBlockElement::GetList
-	 *
-	 * @param $filter
-	 * @param $select
-	 *
-	 * @return array
-	 */
+    /**
+     * @param $filter
+     * @param $select
+     * @return array
+     */
 	public function getQueryFilter($filter, $select)
 	{
 		return [];
@@ -280,11 +249,9 @@ abstract class Source
         }
     }
 
-	/**
-	 * ������� ���������� ��� ��������� ���������
-	 *
-	 * @return int
-	 * */
+    /**
+     * @return int
+     */
 	public function getOrder()
 	{
 		return 500;
@@ -352,10 +319,8 @@ abstract class Source
 		return $result;
 	}
 
-	/**
-	 * ������� ��� �������� ���� ������
-	 *
-	 * @return string
-	 */
+    /**
+     * @return mixed
+     */
 	abstract protected function getLangPrefix();
 }

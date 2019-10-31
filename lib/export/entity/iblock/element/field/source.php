@@ -323,7 +323,7 @@ class Source extends Feed\Export\Entity\Reference\Source
         return $context['IBLOCK_ID'];
     }
 
-	protected function getFieldValues($element, $select, $parent = null)
+	protected function getFieldValues(array $element,array $select, $parent = null) :array
 	{
 		$result = [];
 

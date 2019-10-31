@@ -55,7 +55,7 @@ class EditForm extends Feed\Component\Base\EditForm
 		return $this->loadTableFields($dataClass, $select, $item);
 	}
 
-	protected function loadTableFields($dataClass, $select, $row)
+	protected function loadTableFields($dataClass, $select, $row) :array
 	{
 		/** @var Feed\Reference\Storage\Table $dataClass */
 		$tableFields = $dataClass::getMapDescription();
