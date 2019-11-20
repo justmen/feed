@@ -77,11 +77,10 @@ abstract class Base
 		$this->invalidateDataStorage($changes, $context);
 	}
 
-	/**
-	 * ������� ��� � ��������� ���� ���������
-	 *
-	 * @param $isStrict bool
-	 */
+    /**
+     * @param bool $isStrict
+     * @throws \Exception
+     */
 	public function clear($isStrict = false)
 	{
 		$context = $this->getContext();
@@ -105,28 +104,23 @@ abstract class Base
 		$this->totalCount = ($count !== null ? (int)$count : null);
 	}
 
-	/**
-	 * ���������� ������� ����� ��������
-	 *
-	 * @param $action
-	 */
+    /**
+     * @param $action
+     */
 	protected function setRunAction($action)
 	{
 		$this->runAction = $action;
 	}
 
-	/**
-	 * ������� ����� ��������
-	 *
-	 * @return string
-	 */
+    /**
+     * @return string
+     */
 	public function getRunAction()
 	{
 		return $this->runAction;
 	}
 
 	/**
-	 * ���������� �� ��������� �������
 	 *
 	 * @param $action
 	 *
@@ -154,11 +148,10 @@ abstract class Base
 	}
 
 	/**
-	 * ��������� ���
 	 *
 	 * @param $offset
 	 *
-	 * @return Ligacom\Feed\Result\Step
+	 * @return Feed\Result\Step
 	 */
 	abstract public function run($action, $offset = null);
 
@@ -316,7 +309,6 @@ abstract class Base
 		return null;
 	}
 
-
     /**
      * @param Feed\Result\XmlNode[] $tagResultList
      * @param $elementList
@@ -344,7 +336,6 @@ abstract class Base
 	}
 
 	/**
-
 	 *
 	 * @return Feed\Reference\Storage\Table
 	 */
@@ -376,14 +367,11 @@ abstract class Base
 		return [];
 	}
 
-	/**
-	 * ������������� ���������� �������� �� ����������
-	 *
-	 * @param $changes
-	 * @param $context
-	 *
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @param $changes
+     * @param $context
+     * @throws \Exception
+     */
 	protected function invalidateDataStorage($changes, $context)
 	{
 		$dataClass = $this->getStorageDataClass();
@@ -728,7 +716,6 @@ abstract class Base
 	}
 
 	/**
-	 * ������ ������ ��� ������ � ���������� ��������
 	 *
 	 * @return int
 	 */
@@ -738,7 +725,6 @@ abstract class Base
 	}
 
 	/**
-	 * ������ �� ��� ����������� ����������� ��� ��������� ���������
 	 *
 	 * @param $tagResultList
 	 * @param $tagValuesList
@@ -756,13 +742,13 @@ abstract class Base
 		];
 	}
 
-	/**
-	 * ���� �� ������� ����������� �������� ������� ����
-	 *
-	 * @param array|null $context
-	 *
-	 * @return bool
-	 */
+    /**
+     * @param null $context
+     * @return bool
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
 	protected function hasDataStorageSuccess($context = null)
 	{
 		$dataClass = $this->getStorageDataClass();
@@ -789,14 +775,11 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * ������ �� ������� ���������
-	 *
-	 * @param $queryContext array
-	 * @param $isNeedFull bool
-	 *
-	 * @return array
-	 */
+    /**
+     * @param $queryContext
+     * @param bool $isNeedFull
+     * @return array
+     */
 	protected function getStorageReadyFilter($queryContext, $isNeedFull = false)
 	{
 		$filter = [
@@ -818,10 +801,9 @@ abstract class Base
 	}
 
 	/**
-	 * �������������� ���������� ��� ���������� � ������� ����������� ��������
 	 *
 	 * @param $tagResult Feed\Result\XmlNode
-	 * @param $tagValues Ligacom\Feed\Result\XmlValue
+	 * @param $tagValues Feed\Result\XmlValue
 	 * @param $element array|null
 	 * @param $context array
 	 * @param $data array
@@ -834,7 +816,6 @@ abstract class Base
 	}
 
 	/**
-	 * ��������� ���������� ����� ��� ��������
 	 *
 	 * @return bool
 	 */
@@ -843,15 +824,14 @@ abstract class Base
 		return false;
 	}
 
-	/**
-	 * ��������� ������� ����������� ��������� � ���������� ������
-	 *
-	 * @param $hashList
-	 * @param $context
-	 *
-	 * @return array
-	 * @throws \Bitrix\Main\ArgumentException
-	 */
+    /**
+     * @param $hashList
+     * @param $context
+     * @return array
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
 	protected function checkHashCollision($hashList, $context)
 	{
 		$result = [];
@@ -894,14 +874,11 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * ��� ����������
-	 *
-	 * @param $tagResult Feed\Result\XmlNode
-	 * @param $useHashCollision bool
-	 *
-	 * @return string
-	 */
+    /**
+     * @param $tagResult
+     * @param bool $useHashCollision
+     * @return string
+     */
 	protected function getTagResultHash($tagResult, $useHashCollision = false)
 	{
 		$result = '';
@@ -920,13 +897,14 @@ abstract class Base
 		return $result;
 	}
 
-	/**
-	 * ���������� ��������� � ���� ��������
-	 *
-	 * @param $tagResultList Feed\Result\XmlNode[]
-	 * @param $storageResultList array
-	 * @param $context array
-	 */
+    /**
+     * @param $tagResultList Feed\Result\XmlNode[]
+     * @param $storageResultList array
+     * @param $context array
+     * @throws Main\ArgumentException
+     * @throws Main\ObjectPropertyException
+     * @throws Main\SystemException
+     */
 	protected function writeDataFile($tagResultList, $storageResultList, $context)
 	{
 		$writer = $this->getWriter();

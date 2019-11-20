@@ -18,7 +18,8 @@ class Model extends Feed\Reference\Storage\Model
      */
 	public static function getDataClass()
 	{
-		return Table::getClassName();
+		return Table::getClassName()
+            ;
 	}
 
 	public function getSettings()

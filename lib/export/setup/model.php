@@ -261,7 +261,7 @@ class Model extends Feed\Reference\Storage\Model
 		return $result;
 	}
 
-    protected function getChildCollectionQueryParameters($fieldKey)
+    protected function getChildCollectionQueryParameters($fieldKey) :array
     {
         $result = [];
 

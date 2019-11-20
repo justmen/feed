@@ -586,11 +586,11 @@ class Offer extends Base
 		return $this->sourceCurrencyConversion;
 	}
 
-	/**
-	 * ��������� ��������� ��� ������� �� ������� ����������� ������
-	 *
-	 * @return bool
-	 */
+    /**
+     * @return bool
+     * @throws Main\ObjectNotFoundException
+     * @throws Main\SystemException
+     */
 	protected function findSourceCurrencyConversion()
 	{
 		$setup = $this->getSetup();

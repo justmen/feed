@@ -73,7 +73,7 @@ class Root extends Base
      * @param array $storageResultList
      * @param array $context
      */
-	protected function writeDataFile(array $tagResultList, array $storageResultList, array $context) :void
+	protected function writeDataFile($tagResultList,$storageResultList,$context) :void
 	{
 		$tagResult = reset($tagResultList);
 
